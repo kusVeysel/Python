@@ -33,6 +33,50 @@ class Person:
     def __ne__(self, other): #* eşit değil mi diye karşılaştırmak için kullanılır
         return self.number != other.number
 
+class Number:
+    def __init__(self,value):
+        self.value = value
+    def __add__(self, other): #* toplama işleminin sihirli methodu
+        return Number(self.value + other.value)
+    def __sub__(self, other): #* çıkarma işleminin sihirli methodu
+        return Number(self.value - other.value)
+    def __mul__(self, other): #* çarpma işleminin sihirli methodu
+        return Number(self.value * other.value)
+    def __truediv__(self, other): #* bölme işleminin sihirli methodu
+        if(other.value == 0):
+            return ValueError("Division by zero is not allowed!")
+        return Number(self.value / other.value)
+    def __floordiv__(self, other): #* ondalıksız bölme işleminin sihirli methodu
+        return Number(self.value // other.value)
+    def __mod__(self, other): #* mod alma işleminin sihirli methodu
+        return Number(self.value % other.value)
+    def __pow__(self, other): #* üst alma işleminin sihirli methodu
+        return Number(self.value ** other.value)
+    def __neg__(self): #* sayıyı negatif yapma işleminin sihirli methodu
+        return Number(-self.value)
+    def __pos__(self):  #* sayıyı pozitif işleminin sihirli methodu
+        return Number(+self.value)
+    def __abs__(self): #* sayının mutlak değerini(pozitif yapmanın) almanın işleminin sihirli methodu
+        return Number(abs(self.value))
+    def __str__(self):
+        return str(self.value)
+
+
+number1 = Number(10)
+number2 = Number(3)
+print(number1 + number2)
+print(number1 - number2)
+print(number1 * number2)
+print(number1 / number2)
+print(number1 // number2)
+print(number1 ** number2)
+print(number1 % number2)
+print(-number1)
+print(+number1)
+print(abs(number1))
+
+
+print()
 p1 = Person(4)
 p2 = Person(8)
 print(p1 == p2)
