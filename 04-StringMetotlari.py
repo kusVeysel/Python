@@ -1,122 +1,257 @@
-text=" Hello, World! "
+ #? STRİNG METOTLAR
 
-#? in
-print("ello" in(text)) #* String text'in içinde varsa True yoksa False döner
+#* len(): Uzunluğu döner
 
-#? not in
-print("ello" not in(text)) #* String text'in içinde yoksa True yoksa False döner
+#* upper(): Büyük harflere dönüştürür
 
-#? [Başlangıçindeksi,Bitişindeksi]
-print(text[2:7])
-#? [-Bitişindeksi,-Başlangıçindeksi]
-print(text[-4:-1])
+#* lower(): Küçük harflere dönüştürür
 
-#? -------------STRİNG METOTLAR-------------
+#* strip(): Sağdaki ve soldaki boşlukları kaldırır
+# lstrip(): Sadece soldaki boşlukları kaldırır
+# rstrip(): Sadece sağdaki boşlukları kaldırır
+#! → parametre içine karakter kümesi verilirse, baştaki ve sondaki bu karakterleri kaldırır
+
+#* replace('x','y'): x stringini y stringi ile değiştirir
+
+#* split('x'): x stringinden böler ve liste olarak döner  
+
+#* splitlines(): \n'den böler
+
+#* capitalize(): İlk harfi büyük harfe dönüştürür, diğerlerini küçük harfe dönüştürür
+
+#* casefold(): Küçük harfe dönüştürür, lower'den farkı yok sadece daha fazla harfe dönüştürür ve daha yavaş çalışır
+
+#* title(): Stringin baş harfleri büyük diğer harfleri küçük yazar, rakamdan sonraki harfi de büyük harfle yazar
+
+#* swapcase(): Büyük harfleri küçük, küçük harfleri büyük yapar
+
+#* islower(): Tüm string küçükse True yoksa False döner
+
+#* isupper(): Tüm string büyükse True yoksa False döner
+
+#* center(x, y): 
+# → x: Stringin toplam uzunluğu
+# → y: Sağa ve sola eklenecek eleman
+
+#* count(x,y,z): x'in stringin içinde y-z index aralığında kaç adet olduğunu sayar
+# → x: Sayılan değer
+# → y: Başlama İndeksi(Dahil)
+# → z: Bitiş İndeksi(Dahil değil)
+
+#* startswith(x,y,z): stringin içinde y,z aralığında  x değeri ile başlıyor mu diye bakar
+# → x: Değer
+# → y: Başlama İndeksi(Dahil)
+# → z: Bitiş İndeksi(Dahil değil)
+
+#* endswith(x,y,z): stringin içinde y,z aralığında  x değeri ile bitiyor mu diye bakar
+# → x: Değer
+# → y: Başlama İndeksi(Dahil)
+# → z: Bitiş İndeksi(Dahil değil)
+
+#* expandtabs(): \t karakterlerini belirlenen tab genişliğine göre boşluklara dönüştürür.
+
+#* find(x,y,z): Aranan değerin indexini verir ,değeri bulamazsa -1 döner
+# → x: Aranan Değer
+# → y: Arama Başlangıç İndeksi
+# → z: Arama Bitiş İndeksi
+# rfind(): Aranan değer birden fazla varsa ilk sağdaki(indexi büyük olan) elemanın indexini döndürür
+
+#* index(): Aranan değerin indexini verir, değeri bulamazsa hata verir
+
+#* isalnum(): String; harf ve rakamlardan oluşuyor mu diye kontrol eder. Boşluk ve özel karakter kabul etmez.
+
+#* isascii(): String içinde ascii'de olmayan varsa False yoksa True döner
+
+#* isdecimal(): Sadece rakamlardan oluşuyorsa True yoksa False döner
+
+#* isdigit(): Sadece rakamlardan oluşuyorsa True yoksa False döner
+
+#* isnumeric(): Sadece rakamlardan oluşuyorsa True yoksa False döner
+
+# → isdecimal() ⊂ isdigit() ⊂ isnumeric()
+
+#* isidentifier(): Geçerli bir identifier/değişkenadı olup olmadığını kontrol eder
+
+#* isprintable(): Ekrana yazdırılamaz karakterler(\n,\r...) varsa False yoksa True döner
+
+#* isspace(): Yalnızca boşluk karakterlerinden oluşuyorsa True, yoksa False
+
+#* 'x'.join(dizi): Dizinin elemanları arasına 'x' ekler
+
+#* ljust(x):  x karakter sola yaslar (kendisini de dahil eder) 
+
+#* rjust(x):  x karakter sağa yaslar (kendisini de dahil eder) 
+
+#* maketrans(x,y,z): Kural belirler
+#* translate(a): kuralı uygular
+# → x: Değişecek karakter
+# → y: Yeni karakter
+# → z: Silinecek karakter
+# → a: Uygulanacak kural
+
+#* partition(x): x'ten ayırır, x'ten önce, x'ten sonra ve x olarak 3'e ayrılır, tuple olarak döner
+# → x: Ayrılacak string 
+# rpartition(): Aynı değer birden fazla varsa en sağdaki(indexi büyük olan) ayırıcıdan böler
+
+#* zfill(x): sola x sıfır atar (kendisini de dahil eder)
+
+#? operatör
+#* in(x): İçeriyor mu diye bakar
+# → x: Aranan eleman
+
+#* not in(x): İçermiyor mu diye bakar
+# → x: Aranan eleman
+
 
 #? len
-print("len(text) => ",len(text)) #* Uzunluk döner
+print("------------------------------------------")
+print("len('text') →", len('text'))
+print("------------------------------------------")
 
 #? upper()
-print("text.upper() => ",text.upper()) #* Büyük harfe dönüştürür
+print("'text'.upper() →",'text'.upper())
+print("------------------------------------------")
 
 #? lower()
-print("text.lower() => ",text.lower()) #* Küçük harfe dönüştürür
+print("'TEXT'.lower() →",'TEXT'.lower())
+print("------------------------------------------")
 
 #? strip()
-print("text.strip() => ",text.strip()) #* Sağdan soldan boşlukları kaldırır
-# lstrip(): sadece soldaki boşlukları kaldırır
-# rstrip(): sadece sağdaki boşlukları kaldırır
+print("' text '.strip() →",' text '.strip())
+print("------------------------------------------")
 
 #? replace()
-print("text.replace(\"l\",\"v\") => ",text.replace("l","v")) #* l stringini v stringi ile değiştirir
+print("'text'.replace('t','a') →",'text'.replace('t','a'))
+print("------------------------------------------")
 
 #? split()
-print("text.split(\",\") => ",text.split(",")) #* ,'den böler(liste(dizi) döner)
+print("'te,x,t'.split(',') →",'te,x,t'.split(','))
+print("------------------------------------------")
 
-#? splitlines(bool)
-print("text.splitlines() => ",text.splitlines()) #* \n'den böler
+#? splitlines()
+print("'text\\ntext'.splitlines() →",'text\ntext'.splitlines())
+print("------------------------------------------")
 
 #? capitalize()
-print("\"hdslfh\".capitalize() => ","hdslfh".capitalize()) #* stringin ilk harfini büyük harfe dönüştürür
+print("'tEXT'.capitalize() →",'tEXT'.capitalize()) 
+print("------------------------------------------")
 
 #? casefold()
-print("text.casefold() => ",text.casefold()) #* Küçük harfe dönüştürür, lower'den farkı yok sadece daha fazla harfe dönüştürür ve daha yavaş çalışır
+print("'TEXT'.casefold() →",'TEXT'.casefold())
+print("------------------------------------------")
 
 #? title()
-print("\"sELAM DÜNYA\".title() => ","sELAM DÜNYA".title()) #* Stringin baş harfleri büyük diğer harfleri küçük yazar veya rakamdan sonraki harfi de büyük harfle yazar
+print("'sELAM DÜNYA'.title() →",'sELAM dÜNYA'.title())
+print("------------------------------------------")
 
 #? swapcase()
-print("\"Selam Dünya\".swapcase() => ","Selam Dünya".swapcase()) #* Stringin baş harfleri küçük diğer harfleri büyük yazar
+print("'TeXt'.swapcase() →",'TeXt'.swapcase())
+print("------------------------------------------")
 
 #? islower()
-print("\"result\".islower() => ","result".islower()) #* tüm string küçükse True yoksa False döner
+print("'result'.islower() →",'result'.islower())
+print("------------------------------------------")
 
 #? isupper
-print("\"RESULT\".isupper() => ","RESULT".isupper()) #* tüm string büyükse True yoksa False döner
+print("'RESULT'.isupper() →",'RESULT'.isupper())
+print("------------------------------------------")
 
-#? center(StringinToplamUzunluk,SağaVeSolaNeGelecek)
-print("\"Hello World!\".center(20,\"*\") => ","Hello World!".center(20,"*"))
+#? center()
+print("'text'.center(10,'*') →",'text'.center(10,'*'))
+print("------------------------------------------")
 
-#? count(SayılanDeğer,Başlamaİndeksi,Bitişİndeksi) 
-print("text.count(\"Hello\") => ",text.count("Hello")) #* Hello'nun text'in içinde kaç adet olduğunu sayar
+#? count() 
+print("'text'.count('t') →","text".count('t'))
+print("------------------------------------------")
 
-#? startswith(değer,Başlamaİndeksi,Bitişİndeksi)
-print("text.startswith(\" Hel\") => ",text.startswith(" Hel")) #* text'in içinde parametre içindeki değer ile başlıyor mu diye bakar, True False döner
+#? startswith()
+print("'text'.startswith('x',2,3) →",'text'.startswith('x',2,3))
+print("------------------------------------------")
 
-#? endswith(değer,Başlamaİndeksi,Bitişİndeksi)
-print("text.endswith(\"ld! \") => ",text.endswith("ld! ")) #* text'in içinde parametre içindeki değer ile bitiyor mu diye bakar, True False döner
+#? endswith()
+print("'text'.endswith('e',1,2) →",'text'.endswith('e',1,2))
+print("------------------------------------------")
 
-#? expandtabs(BolşulBüyüklüğü)
-print("\"P\ty\tt\th\to\tn\".expandtabs(10) => ","P\ty\tt\th\to\tn".expandtabs(10)) 
+#? expandtabs()
+print("'P\\ty\\tt\\th\\to\\tn'.expandtabs(10) →",'P\ty\tt\th\to\tn'.expandtabs(10)) 
+print("------------------------------------------")
 
-#? find(ArananDeğer,AramaBaşlangıçİndexi,AramaBitişİndexi)
-print("text.find(\"!\") => ",text.find("!")) #* Aranan değerin indexini verir ,değeri bulamazsa -1 döner
-# rfind(): Aranan değer birden fazla varsa ilk sağdaki elemanın indexini döndürür
+#? find()
+print("'text'.find('x') →",'text'.find('x'))
+print("------------------------------------------")
 
-#? index(ArananDeğer)
-print("text.index(\"!\") => ",text.index("!")) #* Aranan değerin indexini verir ,değeri bulamazsa hata verir, find ile aynı
+#? index()
+print("'text'.index('x') →",'text'.index('x'))
+print("------------------------------------------")
 
 #? isalnum()
-print("text.isalnum() => ",text.isalnum()) #* String; harf ve rakamlardan oluşuyor mu diye kontrol eder, True False döenr
+print("'text'.isalnum() →",'text'.isalnum())
+print("------------------------------------------")
 
 #? isascii()
-print("text.isascii() => ",text.isascii()) #* String içinde ascii'de olmayan varsa False yoksa True döner
+print("'text'.isascii() →",'text'.isascii())
+print("------------------------------------------")
 
 #? isdecimal()
-print("text.isdecimal() => ",text.isdecimal()) #* Sadece rakamlardan oluşuyorsa True yoksa False döner
+print("'1234'.isdecimal() →",'1234'.isdecimal())
+print("------------------------------------------")
 
 #? isdigit()
-print("text.isdigit() => ",text.isdigit()) #* Sadece rakamlardan oluşuyorsa True yoksa False döner
+print("'1234'.isdigit() →",'1234'.isdigit())
+print("------------------------------------------")
 
 #? isidentifier()
-print("text.isidentifier() => ",text.isidentifier()) #* sayılar harfler ve underscore(_) harici false döner (sayı ile başlayamaz)
+print("'text'.isidentifier() →",'text'.isidentifier())
+print("------------------------------------------")
 
 #? isnumeric()
-print("text.isnumeric() => ",text.isnumeric()) #* Sadece rakamlardan oluşuyorsa True yoksa False döner
+print("'1234'.isnumeric() →",'1234'.isnumeric())
+print("------------------------------------------")
 
 #? isprintable()
-print("text.isprintable() => ",text.isprintable()) #* ekrana yazdırılamaz karakterler(\n,\r...) varsa False yoksa True döner
+print("'\\n\\t'.isprintable() →",'\n\t'.isprintable())
+print("------------------------------------------")
 
 #? isspace()
-print("\\t\\n".isspace()) #* yalnızca boşluk karakterlerinden oluşuyorsa True
-Meyveler = ("Elma","Armut","Karpuz","Çilek")
-print("\"-\".join(Meyveler) => ","-".join(Meyveler)) #* dizinin elemanları arasına "-" ekler
+print("'\\t\\n'.isspace()",'\t\n'.isspace())
+print("------------------------------------------")
+
+#? join()
+print("'-'.join(('Elma','Armut','Karpuz','Çilek')) →",'-'.join(('Elma','Armut','Karpuz','Çilek')))
+print("------------------------------------------")
 
 #? ljust()
-cilek = "strawberry"
-print("{cilek.ljust(19)} onun favori meyvesiymiş => ",f"{cilek.ljust(19)} onun favori meyvesiymiş") #* 19 karakter sola yaslar (kendisi(strawberry) 10 karakter bu yüzden 9 karakter sola yaslar) 
+print("{'cilek'.ljust(19)} onun favori meyvesiymiş →",f"{'cilek'.ljust(19)} onun favori meyvesiymiş")
+print("------------------------------------------")
 
 #? rjust()
-print("{cilek.rjust(19)} onun favori meyvesiymiş => ",f"{cilek.rjust(19)} onun favori meyvesiymiş") #* 19 karakter sağa yaslar (kendisi(strawberry) 10 karakter bu yüzden 9 karakter sağa yaslar) 
+print("{'cilek'.rjust(19)} onun favori meyvesiymiş →",f"{'cilek'.rjust(19)} onun favori meyvesiymiş") 
+print("------------------------------------------")
 
-#? maketrans(DeğişecekKarakter,YeniKarakter,SilinecekKarakter) translate(UygulanacakKural)
-result = str.maketrans("P","Y","l") #* kural belirler
-print(text.translate(result)) #* kuralı uygular
+#? maketrans()
+print("'text'.translate(str.maketrans('t','a','x')) →",'text'.translate(str.maketrans('t','a','x')))
+print("------------------------------------------")
 
-#? partition(NerdenAyrılaacak)
-print("\"Tüm gün çilek yiyebilirmiş\".partition(\"çilek\") => ","Tüm gün çilek yiyebilirmiş".partition("çilek")) #* 3'e ayırır(tuple) 
-# rpartition(): aynı değer birden fazla varsa ilk sağda gördüğü elemandan böler
+#? partition()
+print("'Tüm gün çilek yiyebilirmiş'.partition('çilek') →",'Tüm gün çilek yiyebilirmiş'.partition('çilek'))
+print("------------------------------------------")
 
 #? zfill()
-print("\"70\".zfill(9) => ","70".zfill(4)) #* 4 sıfır atar ama , 70 olduğu için yani 2 karakter var , 4 tane sıfır atar
+print("'70'.zfill(4) →",'70'.zfill(4))
+print("------------------------------------------")
 
+#? operatör
+
+#? in()
+print("'xt' in('text') →",'xt' in('text'))
+print("------------------------------------------")
+
+#? not in()
+print("'xt' not in('text') →",'xt' not in('text')) 
+print("------------------------------------------")
+
+#? 
+#? [Başlangıç_indeksi(dahil), Bitiş_indeksi(dahil değil)]
+print("'texttexttext'[2:7] →",'texttexttext'[2:7])
+#? [-Bitişindeksi, -Başlangıçindeksi]
+print("'texttexttext'[-4:-1] →",'texttexttext'[-4:-1])

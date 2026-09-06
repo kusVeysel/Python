@@ -1,26 +1,33 @@
 
+#? \" ve \'
+#* çift tırnak içinde çift tırnak ,tek tırnak içinde tek tırnak olmaz , ancak \ karakteriyle yapılabilir
 print("Hello\" World!")
 print('Hello\' World!')
-#* çift tırnak içinde çift tırnak ,tek tırnak içinde tek tırnak olmaz , ancak \ karakteriyle yapılabilir
 
-print("Hello\\ World!")
+#? \\
 #* Backslash atmak içinde yine \ karakteri kullanılır
+print("Hello\\ World!")
 
-print("Hello \nWorld!")
+#? \n
 #* Alt satıra geçmek için \n kullanılır
+print("Hello \nWorld!")
 
-print("Hello World! \rPython")
+#? \r
 #* carriage return imleci satırın başına taşır; görünen sonuç terminale göre değişebilir
+print("Hello World! \rPython")
 
-print("Hello\tWorld!")
+#? \t
 #* Bir tap boşluk için \t kullanılır
+print("Hello\tWorld!")
 
-print("Hello\bWorld!")
+#? \b
 #* \b backspace karakteridir; imleci bir karakter geri taşıyabilir, boşluk eklemez
+print("Hello\bWorld!")
 
-print("\120\171\164\150\157\156")
+#?
 #* Oktal sayıları harfe yazar
+print("\120\171\164\150\157\156")
 
-print("\x50\x79\x74\x68\x6F\x6E")
+#?
 #* HekzaDekimal sayıları harfe çevirip yazar
-
+print("\x50\x79\x74\x68\x6F\x6E")

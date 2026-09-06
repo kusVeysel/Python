@@ -2,24 +2,27 @@
 
 #* random(): 0 ile 1 (1 dahil değil) arasında sayı üretir.
 
-#* seed(): Üretecin durumunu sistem rastgeleliğiyle ayarlar; aynı tohum aynı diziyi üretir.
+#* seed(): Üreteci verilen tohumla başlatır; aynı tohum aynı rastgele diziyi üretir.
+# → Tohum verilmezse sistem rastgeleliği veya işletim sistemi zamanı kullanılır.
 
-#* getstate(): Sonraki random sayıyı tut.
+#* getstate(): Rastgele sayı üretecinin mevcut durumunu(state) kaydeder.
 
-#* getrandbits(): 8 bit boyutunda sayı üretir(0-255).
+#* getrandbits(x): x bitlik rastgele sayı üretir.
 
 #* randrange(BaşlangıçDeğeri, BitişDeğeri(DahilDeğil),ArtışMiktarı): Belirli aralıklarda belirli örüntüyle rastgele sayılar üretir.
 
-#* randint(BaşlangıçDeğeri, BitişDeğeri): iki sayı arasında tamsayı üretir (a ve b DAHİLDİR)
+#* randint(BaşlangıçDeğeri, BitişDeğeri): iki sayı arasında tamsayı üretir (başlangıç ve bitiş dahildir).
 
-#* choices(dizi, weights = [GelmeOranı], k = Liste_kaç_adet): Diziden rastgele bir eleman döndürür.
+#* choices(dizi, weights = [GelmeOranı], k = Liste_kaç_adet): Diziden k adet rastgele seçim yapar. Aynı eleman birden fazla kez seçilebilir. weights ile seçim olasılıkları ağırlıklandırılabilir.
+# choice(dizi): Diziden rastgele bir eleman döndürür
 
 #* shuffle(dizi): Verilen dizinin elemanlarını rastgele karıştırır.
 
-#* sample(Seri, k = x): Verilen diziden tekrarsız x adet yeni dizi döner.
+#* sample(Seri, k = x): Seriden tekrarsız k adet eleman seçer ve yeni bir liste döndürür.
 # x: adet
 
-#* uniform(Başlangıç_değeri, Bitiş_değeri): iki sayı arasında(ikisi de dahil) rastgele ondalıklı sayı üretir.
+#* uniform(Başlangıç_değeri, Bitiş_değeri): iki sayı arasında rastgele ondalıklı sayı üretir.
+# → Alt ve üst sınırların seçilmesi kayan nokta yuvarlamasına bağlıdır.
 
 #* triangular(Başlangıç_değeri, Bitiş_değeri, mode): 2 sayı arası sayı üretir.
 # mode → kime yakınsa o sayıya yakın sayılar üretir
@@ -29,9 +32,9 @@
 
 #* expovariate(): Üstel dağılıma göre rastgele sayı döndürür.
 
-#* gammavariate(): Normal(Gaussian) dağılıma göre rastgele sayı döndürür.
+#* gammavariate(): Gamma dağılıma göre rastgele sayı döndürür.
 
-#* gauss(): Gama dağılıma göre rastgele sayı döndürür
+#* gauss(): Gaussian/Normal dağılıma göre rastgele sayı döndürür
 
 #* lognormvariate(): Log-normal dağılıma göre rastgele sayı döndürür
 
@@ -56,9 +59,10 @@ print(f"random.random() → {random.random()}")
 
 #? getstate()
 state = random.getstate()
-random.random() # bunu state değişkeni tutar
+next_number = random.random()
 
-random.setstate(state) # bir önce üretilen random sayı ile aynı sayıyı verir
+random.setstate(state)
+print(f"random.setstate(state) sonrası aynı sayı → {random.random()} = {next_number}")
 
 #? getrandbits()
 print("------------------------------------------")
@@ -74,16 +78,18 @@ print("------------------------------------------")
 print(f"random.randint(1,10) → {random.randint(1,10)}")
 print("------------------------------------------")
 
-#? choices()
-print(f"random.choice(['wihte','red','green','yellow','black']) → {random.choice(['wihte','red','green','yellow','black'])}")
+#? choice()
+print(f"random.choice(['white','red','green','yellow','black']) → {random.choice(['white','red','green','yellow','black'])}")
 print("------------------------------------------")
 
 #? choices()
-print(f"random.choices(['cherry','strawberry','graphe','banana','apple'],weights=[10,3,5,1,1],k=20) → {random.choices(['cherry','strawberry','graphe','banana','apple'], weights=[10,3,5,1,1],k=20)}")
+print(f"random.choices(['cherry','strawberry','grape','banana','apple'],weights=[10,3,5,1,1],k=20) → {random.choices(['cherry','strawberry','grape','banana','apple'], weights=[10,3,5,1,1],k=20)}")
 print("------------------------------------------")
 
 #? shuffle()
-print(f"random.shuffle(['skoda','bmw','audi','nissan','toyota','hundai','volvo']) → {random.shuffle(['skoda','bmw','audi','nissan','toyota','hundai','volvo'])}")
+arabalar = ['skoda', 'bmw', 'audi', 'nissan', 'toyota', 'hyundai', 'volvo']
+random.shuffle(arabalar)
+print("random.shuffle(arabalar) →", arabalar)
 print("------------------------------------------")
 
 #? sample()
@@ -109,7 +115,7 @@ print(f"random.betavariate(6,2) → {random.betavariate(6,2)}")
 print("------------------------------------------")
 
 #? expovariate()
-print(f"random.expovariate(1.0) → {random.expovariate(1.0)}") # lambd zorunludur; 1.0 oranını kullanır
+print(f"random.expovariate(1.0) → {random.expovariate(1.0)}")
 print("------------------------------------------")
 
 #? gammavariate()
