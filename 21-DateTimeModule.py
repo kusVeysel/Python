@@ -2,8 +2,8 @@ from datetime import datetime as dt
 from datetime import timezone as tz
 import locale as lcl
 from datetime import timedelta as td
-from datetime import date
-import time
+from datetime import date, time
+import time as tm
 
 print("dt.now()=>",dt.now()) #* şuanın tarih ve saatini alır
 print("dt.now().hour =>",dt.now().hour) #* şuanın sadece saat kısmını verir
@@ -11,8 +11,8 @@ print("dt.now().minute =>",dt.now().minute) #* şuanın sadece dakika kısmını
 print("dt.now().second =>",dt.now().second) #* şuanın sadece saniye kısmını verir
 print("dt.now().microsecond =>",dt.now().microsecond) #* şuanın sadece mikrpsaniye kısmını verir
 print("dt.weekday(dt.now()) =>",dt.weekday(dt.now())) #* haftanın kaçıncı gününde olduğunu verir, index mantığına göre verir(yani pazar için 6 döner)
-print("dt.ctime(dt.now()) =>",dt.ctime(dt.now
-())) #* detaylı tarih verir
+print("dt.ctime(dt.now()) =>",dt.ctime(dt.now())) #* detaylı tarih verir
+
 
 #? strftime metotu
 print()
@@ -89,12 +89,12 @@ my_date = date(2026,8,11)
 my_time = time(21,58,00)
 print(dt.combine(my_date,my_time)) #* tarih ve saati birleştirir
 print(today.replace(hour=7,minute=19)) #* update gibi günceller yer değiştirir
-time.sleep(7) #* 7 saniye uyutur
+tm.sleep(3) #* 3 saniye uyutur
 
-start = time.process_time()
+start = tm.process_time()
 for _ in range(1000000):
     ...
 
-end = time.process_time()
+end = tm.process_time()
 
 print(end-start) #* işlem için işlemcide harcanan süreyi verir
