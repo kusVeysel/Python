@@ -1,77 +1,73 @@
-age = 34
-name = "Veysel KUŞ"
-price = 19.563480
+ #? STRING FORMATLAMA
 
-# text = "My name is {0} , I am {1}".format(name,age)
-# print(text)
+isim = "Veysel KUŞ"
+yas = 34
+fiyat = 19.563480
 
-text =f"My name is {name}, I am {age}" #! kullanım amacı string içinde değişken yazabilmektir , C#'ta bu yapı $"{değişken}" şeklinde, JS'de `${değişken}` şeklindedir
-print(text)
+#? f-string
+#* Stringin başına f yazarak süslü parantez içine değişken yazılır.
+print("------------------------------------------")
+print("f'Merhaba {isim}, yaşım {yas}' →", f"Merhaba {isim}, yaşım {yas}")
+print("------------------------------------------")
 
-print(f"The price is {price:.2f} turkish lira")
-#* price:.2f , virgülden sonra 2 basamak alır
+#? format()
+#* String içine sıralı veya isimli değişken yerleştirir.
+print("'Merhaba {}, yaşım {}'.format(isim, yas) →", "Merhaba {}, yaşım {}".format(isim, yas))
+print("------------------------------------------")
+print("'Merhaba {0}, yaşım {1}'.format(isim, yas) →", "Merhaba {0}, yaşım {1}".format(isim, yas))
+print("------------------------------------------")
 
+#? Ondalık basamak
+#* :.2f, virgülden sonra 2 basamak gösterir.
+print("f'{fiyat:.2f}' →", f"{fiyat:.2f}")
+print("------------------------------------------")
 
-# Not Hesaplama
-notVize = input("Vize notunu giriniz: ")
-notFinal = input("Final notunu giriniz: ")
-ortalama = (float(notVize)+float(notFinal))/2
+#? Hizalama
+#* <: Sola, >: Sağa, ^: Ortaya hizalar. Sayı toplam genişliği belirtir.
+print("'Ad: {:<10}'.format('Veysel') →", "Ad: {:<10}".format("Veysel"))
+print("------------------------------------------")
+print("'Ad: {:>10}'.format('Veysel') →", "Ad: {:>10}".format("Veysel"))
+print("------------------------------------------")
+print("'Ad: {:^10}'.format('Veysel') →", "Ad: {:^10}".format("Veysel"))
+print("------------------------------------------")
 
-result = f"Vize notun: {notVize}   Final notun: {notFinal}   Sınav ortalaman: {ortalama}"
+#? İşaret
+#* + → Pozitif ve negatif sayıların işaretini gösterir.
+#* - → Negatif sayıların işaretini gösterir (varsayılan).
+#* boşluk → Pozitif sayının önüne boşluk, negatif sayının önüne - koyar.
+print("'{:+}'.format(7) →", "{:+}".format(7))
+print("------------------------------------------")
+print("'{: }'.format(7) →", "{: }".format(7))
+print("------------------------------------------")
+print("'{:-}'.format(-7) →", "{:-}".format(-7))
+print("------------------------------------------")
 
-print(result)
+#? Binlik ayırıcı
+#* , veya _ sayıları binlik gruplara ayırır.
+print("'{:,}'.format(543854055867) →", "{:,}".format(543854055867))
+print("------------------------------------------")
+print("'{:_}'.format(543854055867) →", "{:_}".format(543854055867))
+print("------------------------------------------")
 
+#? Sayı tabanları
+#* b: İkilik, o: Sekizlik, x: Onaltılık tabanda gösterir.
+print("'{:b}'.format(6) →", "{:b}".format(6))
+print("------------------------------------------")
+print("'{:o}'.format(19) →", "{:o}".format(19))
+print("------------------------------------------")
+print("'{:x}'.format(250) →", "{:x}".format(250))
+print("------------------------------------------")
 
-#? Biçimlendirme Türleri
+#? Bilimsel gösterim
+#* e, sayıyı bilimsel gösterim biçiminde yazar.
+print("'{:e}'.format(5) →", "{:e}".format(5))
+print("------------------------------------------")
 
-#* {:<4} 4 adet boşluk bırakır formatı sola yaslar
-metin = "My name is Veysel {:<4} , I am 18"
-print(metin.format(7))
+#? Unicode karakter
+#* c, tam sayı karşılığındaki Unicode karakterini gösterir.
+print("'{:c}'.format(199) →", "{:c}".format(199))
+print("------------------------------------------")
 
-#* {:>4} 4 adet boşluk bırakır formatı sağa yaslar
-metin = "My name is Veysel {:>4} , I am 18"
-print(metin.format(7))
-
-#* {:^4} formatı ortaya yazar
-metin = "My name is Veysel {:^4} , I am 18"
-print(metin.format(7))
-
-#* {:-} formatı pozitif sayıysa + diye belirtme 
-metin = "My name is Veysel {:-} , I am 18"
-print(metin.format(7))
-
-#* {:+} formatı pozitif sayıysa + diye belirt 
-metin = "My name is Veysel {:+} , I am 18"
-print(metin.format(7))
-
-#* {: } formatı pozitif sayıysa sayıdan önce 1 boşluk bırakır
-metin = "My name is Veysel {: } , I am 18"
-print(metin.format(-7))
-
-#* {:,} & {:_}  formatı binlik ayırır(para ayırıcı gibi)
-metin = "Benim {:,} param var"
-print(metin.format(543854055867))
-
-#* {:b} formatın binary şeklinde yazar
-metin = "Benim {:b} param var"
-print(metin.format(6))
-
-#* {:c} formatın unicode şeklinde yazar
-metin = "unicode: {:c}"
-print(metin.format(199))
-
-#* {:d} format binaryden sayısal şeklinde yazar
-metin = "sayısal: {:d}"
-print(metin.format(0b101))
-
-#* {:e} formatı bilimsel şekilde gösterir 
-metin = "sayısal: {:e}"
-print(metin.format(5))
-
-#* {:o} formatı oktal tabanda gösterir
-metin = "{0}'un oktal(8lik) tabanda gösterimi: {0:o}"
-print(metin.format(19))
-
-#* {:x} formatı hexadecimal tabanda gösterir
-metin = "{0}'un hexadecimal(16lık) tabanda gösterimi: {0:x}"
-print(metin.format(250))
+#? Yüzde
+#* %, ondalık sayıyı yüzde biçiminde gösterir.
+print("'{:.1%}'.format(0.756) →", "{:.1%}".format(0.756))
