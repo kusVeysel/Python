@@ -7,20 +7,21 @@ print ("Python Giris")
 #* kullanıcıdan metin alır ve her zaman str döndürür; prompt metni ekrana yazılır
 input("Sayı gir: ")
 
-#? değişkene atanan değer, değişkenin tipi olur
-a = 1
-a = "veysel"
-print(f"a değişkeninin tipi → {type(a)}, a → {a}")
+#? pythonda tip yoktur, değişkene atanan değer değişkenin tipi olur
+a = 1 # a degişkeni şuan int
+a = "veysel" # a değişkeni şuan str
+print(f"a değişkeninin tipi → {type(a)}, a değişkenin değeri → {a}")
 
 #? casting (tip belirleme)
+#? type() değişkenin tipini gösterir
 x = str(7)
 y = int(7)
 z = float(7)
 
-print(x, y ,z)
+print(f"x değişkeninin tipi → {type(x)}, x değişkenin değeri → {x}")
+print(f"y değişkeninin tipi → {type(y)}, y değişkenin değeri → {y}")
+print(f"z değişkeninin tipi → {type(z)}, z değişkenin değeri → {z}")
 
-#? type() değişkenin tipini gösterir
-print(type(x), type(y), type(z))
 
 #? Değişken Oluşturma
 #* İsimler Unicode harfleri, rakamları ve "_" içerebilir; rakamla başlayamaz ve

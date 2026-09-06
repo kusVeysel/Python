@@ -1,85 +1,141 @@
+ #? Random Module
+
+#* random(): 0 ile 1 (1 dahil değil) arasında sayı üretir.
+
+#* seed(): Üretecin durumunu sistem rastgeleliğiyle ayarlar; aynı tohum aynı diziyi üretir.
+
+#* getstate(): Sonraki random sayıyı tut.
+
+#* getrandbits(): 8 bit boyutunda sayı üretir(0-255).
+
+#* randrange(BaşlangıçDeğeri, BitişDeğeri(DahilDeğil),ArtışMiktarı): Belirli aralıklarda belirli örüntüyle rastgele sayılar üretir.
+
+#* randint(BaşlangıçDeğeri, BitişDeğeri): iki sayı arasında tamsayı üretir (a ve b DAHİLDİR)
+
+#* choices(dizi, weights = [GelmeOranı], k = Liste_kaç_adet): Diziden rastgele bir eleman döndürür.
+
+#* shuffle(dizi): Verilen dizinin elemanlarını rastgele karıştırır.
+
+#* sample(Seri, k = x): Verilen diziden tekrarsız x adet yeni dizi döner.
+# x: adet
+
+#* uniform(Başlangıç_değeri, Bitiş_değeri): iki sayı arasında(ikisi de dahil) rastgele ondalıklı sayı üretir.
+
+#* triangular(Başlangıç_değeri, Bitiş_değeri, mode): 2 sayı arası sayı üretir.
+# mode → kime yakınsa o sayıya yakın sayılar üretir
+
+
+#* betavariate(alpha, beta): Büyük alpha dağılımı 1'e, büyük beta dağılımı 0'a doğru yoğunlaştırır.
+
+#* expovariate(): Üstel dağılıma göre rastgele sayı döndürür.
+
+#* gammavariate(): Normal(Gaussian) dağılıma göre rastgele sayı döndürür.
+
+#* gauss(): Gama dağılıma göre rastgele sayı döndürür
+
+#* lognormvariate(): Log-normal dağılıma göre rastgele sayı döndürür
+
+#* normalvariate(): Normal dağılıma göre rastgele sayı döndürür
+
+#* vonmisesvariate(): Von Mises(dairesel normal) dağılıma göre rastgele sayı döndürür
+
+#* paretovariate(): Pareto dağılıma göre rastgele sayı döndürür
+
+#* weibullvariate(): Weibull dağılıma göre rastgele sayı döndürür
+
+
 import random 
 
 #? random()
-print(random.random()) #* 0 ile 1 (1 dahil değil) arasında sayı üretir
+print(f"random.random() → {random.random()}")
 
 #? seed()
-random.seed() #* üretecin durumunu sistem rastgeleliğiyle ayarlar; aynı tohum aynı diziyi üretir
-print(random.random())
+random.seed()
+print("------------------------------------------")
+print(f"random.random() → {random.random()}")
 
 #? getstate()
-state = random.getstate() #* sonraki random sayıyı tut
-random.random() #* bunu state değişkeni tutar
+state = random.getstate()
+random.random() # bunu state değişkeni tutar
 
-random.setstate(state) #* 12.satırda üretilen sayı ile aynı sayıyı verir
+random.setstate(state) # bir önce üretilen random sayı ile aynı sayıyı verir
 
-#? getrandbits(BitBoyutu)
-print(random.getrandbits(8)) #* 8 bit boyutunda sayı üretir(0-255)
+#? getrandbits()
+print("------------------------------------------")
+print(f"random.getrandbits(8) → {random.getrandbits(8)}") 
+print("------------------------------------------")
 
-#? randrange(BaşlangıçDeğeri, BitişDeğeri(DahilDeğil),ArtışMiktarı)
-print(random.randrange(1,20,3))
-#* 3.parametreden dolayı : 1,4,7,10,13,16,19 sayıları üretir
+#? randrange()
+print(f"random.randrange(1,20,3) → {random.randrange(1,20,3)}")
+print("------------------------------------------")
+# 3.parametreden dolayı : 1,4,7,10,13,16,19 sayıları üretir
 
-#? randint(BaşlangıçDeğeri, BitişDeğeri)
-print(random.randint(1,10))
+#? randint()
+print(f"random.randint(1,10) → {random.randint(1,10)}")
+print("------------------------------------------")
 
-#? choices(seri) liste,string,tuple vs.
-myList = ["wihte","red","green","yellow","black"]
-print(random.choice(myList)) #* Diziden rastgele bir eleman döndürür
+#? choices()
+print(f"random.choice(['wihte','red','green','yellow','black']) → {random.choice(['wihte','red','green','yellow','black'])}")
+print("------------------------------------------")
 
-#? choices(Seri,weights=[GelmeOranı],k=ListeKaçAdet)
-myList2 = ["cherry","strawberry","graphe","banana","apple"]
-print(random.choices(myList2,weights=[10,3,5,1,1],k=20))
+#? choices()
+print(f"random.choices(['cherry','strawberry','graphe','banana','apple'],weights=[10,3,5,1,1],k=20) → {random.choices(['cherry','strawberry','graphe','banana','apple'], weights=[10,3,5,1,1],k=20)}")
+print("------------------------------------------")
 
-#? shuffle(Seri)
-myList3 = ["skoda","bmw","audi","nissan","toyota","hundai","volvo"]
-random.shuffle(myList3) #* Verilen dizinin elemanlarını rastgele karıştırır
-print(myList3)
+#? shuffle()
+print(f"random.shuffle(['skoda','bmw','audi','nissan','toyota','hundai','volvo']) → {random.shuffle(['skoda','bmw','audi','nissan','toyota','hundai','volvo'])}")
+print("------------------------------------------")
 
-#? sample(Seri,k=adet)
-print(random.sample(myList3,k=3)) #* Verilen diziden tekrarsız 3 adet yeni dizi döner
+#? sample()
+print(f"random.sample(['skoda','bmw','audi','nissan','toyota','hundai','volvo'], k = 3) → {random.sample(['skoda','bmw','audi','nissan','toyota','hundai','volvo'], k = 3)}")
+print("------------------------------------------")
 
-#? uniform(BaşlangıçDeğeri,BitişDeğeri)
-print(random.uniform(10,30)) #* 10 ile 30 arasında(dahil) rastgele ondalıklı sayı üretir
+#? uniform()
+print(f"random.uniform(10,30) → {random.uniform(10,30)}")
+print("------------------------------------------")
 
-#? triangular(BaşlangıçDeğeri,BitişDeğeri,mode)
-#* mode => kime yakınsa o sayıya yakın sayılar üretir
-print(random.triangular(10,30,10))
+#? triangular()
+print(f"random.triangular(10,30,10) → {random.triangular(10,30,10)}")
+print("------------------------------------------")
+
+
 
 print("\n------Belirli Dağılımlara Göre Float Sayı Üreten Fonksiyonlar------")
+print()
 
-#? betavariate(alpha,beta)
-#* Büyük alpha dağılımı 1'e, büyük beta dağılımı 0'a doğru yoğunlaştırır
-print(random.betavariate(6,2)) #* beta 1'e daha yakın , alpha 0'a uzak yani 1'e daha yakın sayılar üretir
+#? betavariate()
+print("------------------------------------------")
+print(f"random.betavariate(6,2) → {random.betavariate(6,2)}") 
+print("------------------------------------------")
 
 #? expovariate()
-#* Üstel dağılıma göre rastgele sayı döndürür
-print(random.expovariate(1.0)) #* lambd zorunludur; 1.0 oranını kullanır
+print(f"random.expovariate(1.0) → {random.expovariate(1.0)}") # lambd zorunludur; 1.0 oranını kullanır
+print("------------------------------------------")
 
-#? gammavariate
-#* Normal (Gaussian) dağılıma göre rastgele sayı döndürür
-print(random.gammavariate(110,2))
+#? gammavariate()
+print(f"random.gammavariate(110,2) → {random.gammavariate(110,2)}")
+print("------------------------------------------")
 
 #? gauss()
-#* Gama dağılıma göre rastgele sayı döndürür
-print(random.gauss(200,50))
+print(f"random.gauss(200,50) → {random.gauss(200,50)}")
+print("------------------------------------------")
 
 #? lognormvariate()
-#* Log-normal dağılıma göre rastgele sayı döndürür
-print(random.lognormvariate(0,0.25))
-
+print(f"random.lognormvariate(0,0.25) → {random.lognormvariate(0,0.25)}")
+print("------------------------------------------")
+ 
 #? normalvariate()
-#* Normal dağılıma göre rastgele sayı döndürür
-print(random.normalvariate(100,50))
+print(f"random.normalvariate(100,50) → {random.normalvariate(100,50)}")
+print("------------------------------------------")
 
 #? vonmisesvariate()
-#* Von Mises(dairesel normal) dağılıma göre rastgele sayı döndürür
-print(random.vonmisesvariate(0,5))
+print(f"random.vonmisesvariate(0,5) → {random.vonmisesvariate(0,5)}")
+print("------------------------------------------")
 
 #? paretovariate()
-#* Pareto dağılıma göre rastgele sayı döndürür
-print(random.paretovariate(3))
+print(f"random.paretovariate(3) →{random.paretovariate(3)}")
+print("------------------------------------------")
 
 #? weibullvariate()
-#* Weibull dağılıma göre rastgele sayı döndürür
-print(random.weibullvariate(1,1.5))
+print(f"random.weibullvariate(1,1.5) → {random.weibullvariate(1,1.5)}")
+print("------------------------------------------")
