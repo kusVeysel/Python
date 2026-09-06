@@ -1,8 +1,8 @@
 
 #? set
-#* sırasız: her çalıştığında veriler sırasız(karışık) olarak gelir
-#* değiştirilemez: veriler değiştirilemez
-#* yinelenemez: aynı veri kullanılamaz
+#* Sırasızdır: Kod her çalıştığında veriler sırasız(karışık sırayla gelir
+#* Değiştirilemez: Veriler değiştirilemez
+#* Yinelenemez: Aynı veri kullanılamaz
 
 fruits = {"üzüm","kiraz","kapruz","kavun","armut","elma"}
 fruits2 = {"hurma","domates","şeftali"}

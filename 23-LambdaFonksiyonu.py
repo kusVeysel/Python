@@ -4,7 +4,7 @@
 #! python için ternary operator yazılımı
 #! degişken = koşul_doğruysa if koşul else koşul_yanlışsa
 
-#! başka kullanım
+#! başka kullanım (iki dal da önce değerlendirilir; kısa devre için ternary expression kullanın)
 #! degişken = (koşul_yanlışsa, koşul_doğruysa)[koşul] 
 
 sayi = 0

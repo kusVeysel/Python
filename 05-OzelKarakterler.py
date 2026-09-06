@@ -10,13 +10,13 @@ print("Hello \nWorld!")
 #* Alt satıra geçmek için \n kullanılır
 
 print("Hello World! \rPython")
-#* Replace gibi ,derleyici \r'yi görünce en başa gelir ve \r'den sonrasını yazar
+#* carriage return imleci satırın başına taşır; görünen sonuç terminale göre değişebilir
 
 print("Hello\tWorld!")
 #* Bir tap boşluk için \t kullanılır
 
 print("Hello\bWorld!")
-#* \b Bir space(boşluk) geri gelir
+#* \b backspace karakteridir; imleci bir karakter geri taşıyabilir, boşluk eklemez
 
 print("\120\171\164\150\157\156")
 #* Oktal sayıları harfe yazar

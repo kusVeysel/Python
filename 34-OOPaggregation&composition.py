@@ -41,7 +41,7 @@ class Employee2:
 class Department2:
     def __init__(self,name_dp,employees):
         self.name_dp = name_dp
-        self.employees = [Employee(e[0],e[1]) for e in employees] #* Composition
+        self.employees = [Employee2(e[0],e[1]) for e in employees] #* Composition
 
     def show_department(self):
         print(f"Department: {self.name_dp}")

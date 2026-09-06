@@ -88,7 +88,7 @@ print("text.isdecimal() => ",text.isdecimal()) #* Sadece rakamlardan oluşuyorsa
 #? isdigit()
 print("text.isdigit() => ",text.isdigit()) #* Sadece rakamlardan oluşuyorsa True yoksa False döner
 
-#? isidentifer() 
+#? isidentifier()
 print("text.isidentifier() => ",text.isidentifier()) #* sayılar harfler ve underscore(_) harici false döner (sayı ile başlayamaz)
 
 #? isnumeric()
@@ -98,6 +98,7 @@ print("text.isnumeric() => ",text.isnumeric()) #* Sadece rakamlardan oluşuyorsa
 print("text.isprintable() => ",text.isprintable()) #* ekrana yazdırılamaz karakterler(\n,\r...) varsa False yoksa True döner
 
 #? isspace()
+print("\\t\\n".isspace()) #* yalnızca boşluk karakterlerinden oluşuyorsa True
 Meyveler = ("Elma","Armut","Karpuz","Çilek")
 print("\"-\".join(Meyveler) => ","-".join(Meyveler)) #* dizinin elemanları arasına "-" ekler
 

@@ -4,7 +4,7 @@ import random
 print(random.random()) #* 0 ile 1 (1 dahil değil) arasında sayı üretir
 
 #? seed()
-random.seed() #* random sayı üretecini başlatır, değer verilirse her zaman aynı seed değeri üretir
+random.seed() #* üretecin durumunu sistem rastgeleliğiyle ayarlar; aynı tohum aynı diziyi üretir
 print(random.random())
 
 #? getstate()
@@ -20,7 +20,7 @@ print(random.getrandbits(8)) #* 8 bit boyutunda sayı üretir(0-255)
 print(random.randrange(1,20,3))
 #* 3.parametreden dolayı : 1,4,7,10,13,16,19 sayıları üretir
 
-#?  radint(BaşlangıçDeğeri, BitişDeğeri)
+#? randint(BaşlangıçDeğeri, BitişDeğeri)
 print(random.randint(1,10))
 
 #? choices(seri) liste,string,tuple vs.
@@ -31,7 +31,7 @@ print(random.choice(myList)) #* Diziden rastgele bir eleman döndürür
 myList2 = ["cherry","strawberry","graphe","banana","apple"]
 print(random.choices(myList2,weights=[10,3,5,1,1],k=20))
 
-#? shuffles(Seri)
+#? shuffle(Seri)
 myList3 = ["skoda","bmw","audi","nissan","toyota","hundai","volvo"]
 random.shuffle(myList3) #* Verilen dizinin elemanlarını rastgele karıştırır
 print(myList3)
@@ -49,16 +49,15 @@ print(random.triangular(10,30,10))
 print("\n------Belirli Dağılımlara Göre Float Sayı Üreten Fonksiyonlar------")
 
 #? betavariate(alpha,beta)
-#* alpha => 0'a ne kadar yakınsa o kadar 0'a yakın sayılar üretir
-#* beta => 1'e ne kadar yakınsa o kadar 1'e yakın sayılar üretir
+#* Büyük alpha dağılımı 1'e, büyük beta dağılımı 0'a doğru yoğunlaştırır
 print(random.betavariate(6,2)) #* beta 1'e daha yakın , alpha 0'a uzak yani 1'e daha yakın sayılar üretir
 
 #? expovariate()
 #* Üstel dağılıma göre rastgele sayı döndürür
-print(random.expovariate())
+print(random.expovariate(1.0)) #* lambd zorunludur; 1.0 oranını kullanır
 
 #? gammavariate
-#* Gama dağılıma göre rastgele sayı döndürür
+#* Normal (Gaussian) dağılıma göre rastgele sayı döndürür
 print(random.gammavariate(110,2))
 
 #? gauss()

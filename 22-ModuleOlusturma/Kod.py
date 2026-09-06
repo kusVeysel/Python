@@ -5,6 +5,6 @@ print(bm.number)
 
 print(bm.gretting("CSharp"))
 
-print(f"name: {bm.person["name"]}")
-print(f"age: {bm.person["age"]}")
-print(f"country: {bm.person["country"]}")
+print(f"name: {bm.person['name']}")
+print(f"age: {bm.person['age']}")
+print(f"country: {bm.person['country']}")

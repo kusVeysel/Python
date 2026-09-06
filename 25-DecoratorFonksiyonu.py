@@ -25,14 +25,14 @@ print("\n--------2.Örnek--------\n")
 def authentication(func):
     def wrapper(user,*args,**kwargs):
         if not user.get("auth",False):
-            print(f"Authorization failed for {user["name"]} !")
+            print(f"Authorization failed for {user['name']} !")
             return
         return func(user,*args,**kwargs)
     return wrapper
 
 @authentication
 def view_account(user):
-    print(f"Welcome, {user["name"]}")
+    print(f"Welcome, {user['name']}")
 
 user1 = {
     "name":"Veysel KUŞ",
@@ -83,7 +83,7 @@ print("\n --------4.Örnek--------\n")
 
 def flexible_decorator(func):
     def wrapper(*args,**kwargs):
-        print(f"Fonciton name is {func.__name__}")
+        print(f"Function name is {func.__name__}")
         if(args):
             print(f"args for {func.__name__}: {args}")
         else:

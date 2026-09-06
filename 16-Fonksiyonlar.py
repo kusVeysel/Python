@@ -69,6 +69,8 @@ print(result)
 
 #? Recursion(Rekürsif) fonksiyon
 def fac(n):
+    if n < 0:
+        raise ValueError("Faktöriyel negatif sayılar için tanımlı değildir.")
     if(n==0 or n==1):
         return 1
     else:
@@ -77,6 +79,8 @@ def fac(n):
 print(fac(5))
 
 def fib(n):
+    if n < 0:
+        raise ValueError("Fibonacci indisi negatif olamaz.")
     if(n<=0):
         return 0
     elif(n==1):
@@ -89,6 +93,8 @@ for item in range(10):
 
 print()
 def topla(n):
+    if(n <= 0):
+        raise ValueError("Pozitif bir sayı girilmelidir.")
     if(n == 1):
         return 1
     else:

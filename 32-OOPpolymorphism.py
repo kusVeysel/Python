@@ -7,11 +7,11 @@ class Vehicle:
 
 class Car(Vehicle):
     def move(self):
-        return f"Tihs car drives on the road"
+        return f"This car drives on the road"
 
 class Boat(Vehicle):
     def move(self):
-        return f"The boat salis on water"
+        return f"The boat sails on water"
 
 class Airplane(Vehicle):
     def move(self):

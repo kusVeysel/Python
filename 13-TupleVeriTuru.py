@@ -1,8 +1,8 @@
 
 #? tuple
-#* sıralı: her çalıştığında veriler sıralı olarak gelir
-#* değiştirilemez: veriler değiştirilemez
-#* yinelenebilir: aynı veri kullanılabilir
+#* Sıralıdır: Kod her çalıştığında veriler hangi sırayla yazıldıysa öyle gelir
+#* Değiştirilemez: Veriler değiştirilemez
+#* Yinelenebilir: Aynı veri kullanılabilir
 
 
 fruits = ("çilek","armut","elma","ayva","muz")

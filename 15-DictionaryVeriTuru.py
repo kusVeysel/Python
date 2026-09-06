@@ -1,8 +1,8 @@
 
 #? dictionary
-#* sıralı: her çalıştığında veriler sıralı olarak gelir
-#* değiştirilebilir: veriler değiştirilebilir
-#* yinelenemez: aynı veri kullanılamaz
+#* Sıralıdır: Kod her çalıştığında veriler hangi sırayla yazıldıysa öyle gelir
+#* Değiştirilebilir: Veriler değiştirilebilir
+#* Yinelenemez: Aynı veri kullanılamaz
 
 car = {
     "brand": "skoda",
@@ -11,11 +11,11 @@ car = {
     "year":"1959"
 }
 
-print(f"{car["brand"]}, {car['model']}, {car['year']}, {car['colors']} "),
+print(f"{car['brand']}, {car['model']}, {car['year']}, {car['colors']} "),
 
 person = dict(name="Veysel",age=19,country="Türkiye")
 
-print(f"{person.get("name")}, {person.get("age")}, {person.get("country")}")
+print(f"{person.get('name')}, {person.get('age')}, {person.get('country')}")
 
 person["student"] = True #* yeni key-value oluşturur
 print(person)
@@ -31,10 +31,10 @@ print("car.keys() =>",my_keys)
 my_values = car.values() #* car dictionary'nin değerlerini döner
 print("car.values() =>",my_values)
 
-#? item()
+#? items()
 result = car.items()
-print(result) #* dictionary'i liste içinde tuple olarak döner
-#* yapılan değişik result'a direk yansır
+print(result) #* key-value çiftlerini view nesnesi olarak döner
+#* sözlükteki değişiklikler view nesnesine yansır
 
 #? update()
 car.update({"tekerlek":4}) #* eğer dictionary tipinde , girilen değer(tekerlek) varsa veriyi günceller yoksa yeni bi key-value oluşturur
@@ -54,8 +54,7 @@ car.clear()
 del car #*car dictionary'sini komple siler
 
 #? copy()
-kisi = person.copy()
-#! sadece verilerin kopyasını atar ,adresi atamaz dolayısıyla fruit2 ya da newfruit'a yapılan değişiklik diğerini etkilemez
+kisi = person.copy() #* sığ (shallow) kopyadır; iç içe nesneler paylaşılabilir
 
 #? 2.kopyalama yolu
 kisi2 = dict(person)

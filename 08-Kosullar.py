@@ -14,4 +14,4 @@ x = bool("python")
 y = bool(7)
 print(x,y)
 print(type(x),type(y))
-# Boş string hariç True, 0 hariç true döner
+# None, False, 0 ve boş string/list/tuple/set/dict değerleri False kabul edilir.

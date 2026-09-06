@@ -4,8 +4,8 @@ fruit = ["Graphe","Orange","Strawberry","Pineapple","Melon","Matermelon"]
 fruit2 = ["Armut","Ayva","Hurma"]
 
 #? copy()
-newfruit = fruit2.copy() #* fruit2'nin kopyasını newfruit'a ekler 
-#! sadece verilerin kopyasını atar ,adresi atamaz dolayısıyla fruit2 ya da newfruit'a yapılan değişiklik diğerini etkilemez
+newfruit = fruit2.copy() #* sığ (shallow) kopya oluşturur
+#! iç içe mutable nesneler varsa alt nesneler iki listede paylaşılır
 
 #? append(eklenecek_eleman)
 fruit.append("cherry") #* append elemanı sona ekler

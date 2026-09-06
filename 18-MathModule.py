@@ -65,7 +65,7 @@ print()
 print("math.gcd(19,4) =>",math.gcd(19,4)) #* 1.parametre ile 2.parametrenin en büyük ortak bölenini verir
 print("math.hypot(3,4) =>",math.hypot(3,4)) #* 2 parametreyi hipotenüs olarak kabul edip hipotenüsü verir
 print("math.isclose(0.1+0.2,0.3) =>",math.isclose(0.1+0.2,0.3)) #* 2 parametreyi birbirine yakın mı diye kontrol eder
-print("math.isfinite(7) =>",math.isfinite(7)) #* 1.parametre sonsuz mu diye kontrol eder
+print("math.isfinite(7) =>",math.isfinite(7)) #* sonlu olup olmadığını kontrol eder
 print("math.isinf(7) =>",math.isinf(7)) #* 1.parametre sonsuz mu diye kontrol eder
 print("math.isnan(7) =>",math.isnan(7)) #* 1.parametre nan mı diye kontrol eder
 print("math.frexp(10) =>",math.frexp(10)) #* 1.parametreni 2^x * y şeklinde verir

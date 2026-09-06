@@ -34,7 +34,7 @@ print("cmath.isnan(2+3j) =>",cmath.isnan(2+3j))
 print()
 print("cmath.isclose(10+7j,10+7j,abs_tol=0.005) =>",cmath.isclose(10+7j,10+7j,abs_tol=0.005))
 print("cmath.phase(2+3j) =>",cmath.phase(2+3j))
-print("cmath.atan(3/2) =>",cmath.atan(3/2)) #* yukarıdaki ile aynı sonucu verir
+print("cmath.atan(3/2) =>",cmath.atan(3/2)) #* gerçek sayı girdisi için sonucu verir; üstteki karmaşık girdiden farklıdır
 print("cmath.polar(2+3j) =>",cmath.polar(2+3j)) #* 2.değeri yukarıdaki ile aynı
 print("cmath.rect(3.163326435434,1.249045637405) =>",cmath.rect(3.163326435434,1.249045637405))
 print("cmath.log(1+1j) =>",cmath.log(1+1j))

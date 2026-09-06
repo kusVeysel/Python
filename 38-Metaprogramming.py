@@ -1,3 +1,7 @@
+
+#! Bu örnek çalışma zamanında sınıfa metot ekleme (monkey patching) gösterir.
+#! metaprogramming kavramının yalnızca bir örneğidir.
+
 def newMethod(self):
     print("New method added!")
 

@@ -44,7 +44,7 @@ class Number:
         return Number(self.value * other.value)
     def __truediv__(self, other): #* bölme işleminin sihirli methodu
         if(other.value == 0):
-            return ValueError("Division by zero is not allowed!")
+            raise ValueError("Division by zero is not allowed!")
         return Number(self.value / other.value)
     def __floordiv__(self, other): #* ondalıksız bölme işleminin sihirli methodu
         return Number(self.value // other.value)

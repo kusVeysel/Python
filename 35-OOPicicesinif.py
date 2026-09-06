@@ -2,7 +2,7 @@ class Car:
     def __init__(self, brand, model, engine_hp, engine_fuel):
         self.brand = brand
         self.model = model
-        self.engine = Car.Engine(engine_hp, engine_fuel) #* iç class'ın nesnesi oluşturuluyor
+        self.engine = Car.Engine(engine_hp, engine_fuel) #* iç sınıfın nesnesi oluşturuluyor
 
     def show_details(self): #* instance method
         print(f"Car Brand: {self.brand}, Model: {self.model}")
@@ -11,11 +11,11 @@ class Car:
     class Engine:
         def __init__(self, hp, fuel_type):
             self.type = "V8"
-            self.hourse_power = hp
+            self.horse_power = hp
             self.fuel_type = fuel_type
 
         def show_engine(self):
-            print(f"Enigne Type: {self.type}, Horse Power: {self.hourse_power}, Fuel Type: {self.fuel_type}")
+            print(f"Engine Type: {self.type}, Horse Power: {self.horse_power}, Fuel Type: {self.fuel_type}")
 
 c1 = Car("BMW", "M3", 500, "Gasoline")
 c1.show_details()
