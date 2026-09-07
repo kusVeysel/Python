@@ -32,7 +32,7 @@ print("------------------------------------------")
 #? Veri sıralama ve yüzdelikler
 print("-----Sıralama ve Yüzdelikler-----")
 print(f"statistics.quantiles(data, n=4) → {statistics.quantiles(data, n=4)}") #* çeyreklik değerleri verir
-print(f"statistics.quantiles(data, n=4, method='inclusive') → {statistics.quantiles(data, n=4, method='inclusive')}")
+print(f"statistics.quantiles(data, n=4, method='inclusive') → {statistics.quantiles(data, n=4, method='inclusive')}") #* veri değerlerini de hesaba katan çeyreklikleri verir
 print("------------------------------------------")
 
 #? İki veri kümesinin ilişkisi
@@ -48,10 +48,10 @@ print("------------------------------------------")
 #? Normal dağılım
 print("-----Normal Dağılım-----")
 normal = statistics.NormalDist(mu=100, sigma=15)
-print(f"normal.mean → {normal.mean}")
-print(f"normal.stdev → {normal.stdev}")
+print(f"normal.mean → {normal.mean}") #* normal dağılımın ortalamasını verir
+print(f"normal.stdev → {normal.stdev}") #* normal dağılımın standart sapmasını verir
 print(f"normal.pdf(100) → {normal.pdf(100)}") #* olasılık yoğunluk fonksiyonunu verir
 print(f"normal.cdf(100) → {normal.cdf(100)}") #* kümülatif dağılım fonksiyonunu verir
 print(f"normal.inv_cdf(0.5) → {normal.inv_cdf(0.5)}") #* yüzdelik değerini tersine çevirir
-print(f"normal.overlap(statistics.NormalDist(110, 15)) → {normal.overlap(statistics.NormalDist(110, 15))}")
+print(f"normal.overlap(statistics.NormalDist(110, 15)) → {normal.overlap(statistics.NormalDist(110, 15))}") #* iki normal dağılımın örtüşme oranını verir
 print("------------------------------------------")
