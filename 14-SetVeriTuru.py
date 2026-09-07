@@ -1,103 +1,191 @@
-
-#? set
+ #? set
 #* Sırasızdır: Kod her çalıştığında veriler sırasız(karışık sırayla gelir
 #* Değiştirilemez: Veriler değiştirilemez
-#* Yinelenemez: Aynı veri kullanılamaz
+#* Yinelenemez: Aynı veri tekrar kullanılamaz
 
-fruits = {"üzüm","kiraz","kapruz","kavun","armut","elma"}
-fruits2 = {"hurma","domates","şeftali"}
+my_set = {"veri1","veri2","veri3"}
 
-print(fruits)
 
-#? Set Methodları
+#? Set Metotları
 
-#? add(eklenecek_eleman)
-fruits.add("salatalık")
-print("fruits.add(\"salatalık\") =>",fruits)
+#* add(): Set'e tek bir eleman ekler
 
-#? update(eklenecek_veri): extend ile aynı işlev
-fruits.update(fruits2)
-print("fruits.update(fruits2) =>",fruits)
+#* update(): Set'e başka bir iterable'ın elemanlarını ekler
+# → Liste, tuple, set vb. iterable'lar eklenebilir.
+# → Genellikle iki seti birleştirmek için kullanılır.
 
-#? remove(silinecek_eleman)
-fruits2.remove("hurma")
-print("fruits2.remove(\"hurma\") =>",fruits2)
+#* remove(): Belirtilen elemanı siler
+#! Eleman sette yoksa KeyError hatası verir
 
-#? discard(silinecek_eleman)
-fruits2.discard("domates")
-print("fruits2.discard(\"domates\") =>",fruits2)
+#* discard(): Belirtilen elemanı siler
+#! Eleman sette yoksa hata vermez
 
-#* remove() ile discard() arasındaki fark , eğer parametredeki veri, sette içermiyorsa remove() hata verirken discard() vermez
+#* pop(): Set'ten bir elemanı siler ve döndürür
+#! Set sırasız olduğu için hangi elemanın silineceği garanti edilmez
 
-#? pop(): rastgele veri kaldırır
-silinen_veri = fruits.pop()
-print(f"silinen veri: {silinen_veri}")
+#* del: Set değişkenini tamamen siler
 
-#? clear(): setin içindeki verileri siler
-fruits.clear()
-print(fruits)
+#* clear(): Set içindeki tüm elemanları siler
+# → Set boş bir set hâline gelir.
 
-#? del: seti komple siler
-del fruits2
+#* intersection(): İki veya daha fazla setin kesişimini yeni bir set olarak döndürür.
+
+#* intersection_update(): Sadece kesişen elemanları sette tutar
+# → Orijinal set değiştirilir.
+
+#* union(): Setleri birleştirir ve yeni bir set döndürür
+# → Tekrarlanan elemanlar yalnızca bir kez bulunur.
+
+#* copy(): Setin sığ(shallow) kopyasını oluşturur
+
+#* difference(): İki set arasındaki farkı yeni bir set olarak döndürür
+# → İlk sette olup ikinci sette olmayan elemanlar.
+
+#* difference_update(): Fark elemanlarını sette tutar
+# → Orijinal set değiştirilir.
+
+#* symmetric_difference(): İki sette bulunan ancak her ikisinde aynı anda bulunmayan elemanları yeni bir set olarak döndürür
+
+#* symmetric_difference_update(): Ortak elemanları kaldırır, sadece iki sette farklı olan elemanları tutar
+# → Orijinal set değiştirilir.
+
+#* isdisjoint(): İki setin ortak elemanı olup olmadığını kontrol eder
+# → Ortak eleman yoksa True
+# → Ortak eleman varsa False
+
+#* issubset(): Bir setin diğer setin alt kümesi olup olmadığını kontrol eder
+# → İlk setteki TÜM elemanlar ikinci sette varsa True
+# → Aksi durumda False
+
+#* issuperset(): Bir setin diğer seti kapsayıp kapsamadığını kontrol eder
+# → İkinci setin TÜM elemanları ilk sette varsa True
+# → Aksi durumda False
+
+
+fruit = {"Elma","Armut"} # set veri türü
+fruit2 = {"Karpuz","Ayva"} # set veri türü
+print(f"fruit → {fruit}")
+print(f"fruit2 → {fruit2}")
+print("------------------------------------------")
+
+#? add()
+fruit.add("Salatalık")
+print('fruit.add("Salatalık") →',fruit)
+print("------------------------------------------")
+
+#? update()
+fruit.update(fruit2)
+print('fruit.update(fruit2) →',fruit)
+print("------------------------------------------")
+
+#? remove()
+fruit.remove("Ayva")
+print('fruit.remove("Ayva") →',fruit)
+print("------------------------------------------")
+
+#? discard()
+fruit.discard("Karpuz")
+print('fruit.discard("Karpuz") →',fruit)
+print("------------------------------------------")
+
+#? pop()
+silinen_veri = fruit.pop()
+print(f"fruit.pop() → {fruit}, silinen veri → {silinen_veri}")
+print("------------------------------------------")
+
+#? clear()
+fruit.clear()
+print("fruit.clear() →",fruit)
+print("------------------------------------------")
+
+#? del
+del fruit
 
 
 number1 = {1,2,3,4,5,6}
 number2 = {3,5,7,2,1}
+print(f"number1 → {number1}")
+print(f"number2 → {number2}")
+print("------------------------------------------")
 
-#? intersection(set): kesişen veriler set olarak döner
-result2 = number1.intersection(number2)
-print("number1.intersection(number2) =>",result2)
+#? intersection()
+result = number1.intersection(number2)
+print('result = number1.intersection(number2) →',result)
+print("------------------------------------------")
 
-#? intersection_update(set): kesişen veriler kalır
+#? intersection_update()
 number1.intersection_update(number2)
-print("number1.intersection_update(number2) =>",number1)
+print('number1.intersection_update(number2) →',number1)
+print("------------------------------------------")
 
 
 meyve1 = {"üzüm","kiraz","kapruz","kavun","armut","elma"}
 meyve2 = {"hurma","domates","şeftali"}
+print(f"meyve1 → {meyve1}")
+print(f"meyve2 → {meyve2}")
+print("------------------------------------------")
 
-#? union(set): setleri birleştirir ve yeni bi set döndürür  
+#? union()  
 result = meyve1.union(meyve2)
-print("meyve1.union(meyve2) =>",result)
+print('result = meyve1.union(meyve2) →',result)
+print("------------------------------------------")
 
-#? copy(): setin kopyasını döner
+#? copy()
 kopya = meyve2.copy()
-print("kopya = meyve2.copy() =>",kopya)
+print('kopya = meyve2.copy() →',kopya)
+print("------------------------------------------")
 
-number1 = {1,2,3,4,5,6}
-number2 = {3,5,7,2,1}
+number3 = {1,2,3,4,5,6}
+number4 = {3,5,7,2,1}
+print(f"number3 → {number3}")
+print(f"number4 → {number4}")
+print("------------------------------------------")
 
-#? difference(set): fark veri setini döner
-fark = number1.difference(number2) #* number1'de olup number2'de olmayanları döner
-print("number1.difference(number2) =>",fark)
+#? difference()
+fark = number3.difference(number4)
+print('fark = number3.difference(number4) →',fark)
+print("------------------------------------------")
 
-number1.difference_update(number2) #* number1'de olup number2'de olmayanları tutar
-print("number1.difference(number2) =>",number1)
-
-
-number1 = {1,2,3,4,5,6}
-number2 = {3,5,7,2,1}
-
-#? symmetric_difference(set): kesişim dışındaki verileri döner
-result = number1.symmetric_difference(number2)
-print("number1.symmetric_difference(number2) =>",result)
-
-#? symmetric_difference_update(set): kesişim dışındaki verileri atar
-number1.symmetric_difference_update(number2)
-print("number1.symmetric_difference(number2) =>",number1)
+#? difference_update()
+number3.difference_update(number4)
+print('number3.difference(number4) →',number3)
+print("------------------------------------------")
 
 
-number1 = {1,2,3,4,5,6}
-number2 = {3,5,7,2,1}
+number5 = {1,2,3,4,5,6}
+number6 = {3,5,7,2,1}
+print(f"number5 → {number5}")
+print(f"number6 → {number6}")
+print("------------------------------------------")
 
-#? isdisjoint(set): ortak eleman varsa False, yoksa True döner
-result = number1.isdisjoint(number2)
-print("number1.isdisjoint(number2) =>",result)
+#? symmetric_difference()
+result = number5.symmetric_difference(number5)
+print('result = number5.symmetric_difference(number6) →',result)
+print("------------------------------------------")
 
-#? issubset(set): elemanlar varsa True yoksa False döner, contains gibi(içeriyor mu?)
-result = number1.issubset(number2) #* number1'deki tüm veriler number2'de var mı
-print("number1.issubset(number2) =>",result)
+#? symmetric_difference_update()
+number5.symmetric_difference_update(number6)
+print('number5.symmetric_difference(number6) →',number5)
+print("------------------------------------------")
 
-#? issuperset(set): elemanlar varsa True yoksa False döner, contains gibi(içeriyor mu?)
-result = number1.issuperset(number2) #* number2'deki tüm veriler number1'de var mı
-print("number1.issuperset(number2) =>",result)
+
+number7 = {1,2,3,4,5,6}
+number8 = {3,5,7,2,1}
+print(f"number7 → {number7}")
+print(f"number8 → {number8}")
+print("------------------------------------------")
+
+#? isdisjoint()
+result = number7.isdisjoint(number8)
+print('result = number7.isdisjoint(number8) →',result)
+print("------------------------------------------")
+
+#? issubset()
+result = number7.issubset(number8)
+print('result = number7.issubset(number8) →',result)
+print("------------------------------------------")
+
+#? issuperset(): 
+result = number7.issuperset(number8)
+print('result = number7.issuperset(number8) →',result)
+print("------------------------------------------")

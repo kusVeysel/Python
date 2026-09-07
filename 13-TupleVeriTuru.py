@@ -1,21 +1,20 @@
-
-#? tuple
+ #? tuple
 #* Sıralıdır: Kod her çalıştığında veriler hangi sırayla yazıldıysa öyle gelir
 #* Değiştirilemez: Veriler değiştirilemez
-#* Yinelenebilir: Aynı veri kullanılabilir
+#* Yinelenebilir: Aynı veri tekrar kullanılabilir
 
 
-fruits = ("çilek","armut","elma","ayva","muz")
-fruits1= ("karpuz",) #* tuple veri turu
-fruits2 = ("kavun") #* string veri turu
+fruits = ("çilek","armut","elma","ayva","muz") # tuple veri türü
+fruits1= ("karpuz",) # tuple veri türü
+fruits2 = ("kavun") # string veri türü
 
-print(type(fruits1),type(fruits2))
+print(type(fruits),type(fruits1),type(fruits2))
 
 #? *n : elemanların verilerini n kadar tekrar yazar
-print(fruits*2)
+print(fruits * 2)
 
 x,y,*z = fruits #! destruct
-#! * = ... (rest/spread opeeratörü) javascript'in önemli bir operatörüdür ,acc yani biriktiricidir
+#! * (rest/spread operatörü) = accumulator (biriktiricidir)
 
 print(x)
 print(y)
