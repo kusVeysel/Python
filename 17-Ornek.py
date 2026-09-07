@@ -1,10 +1,9 @@
-
-#* Girilen 4 basamaklı bir sayının yazıya çevrilmesi
+ #* Girilen 4 basamaklı bir sayının yazıya çevrilmesi
 
 def number_to_words(number):
     ones = ["","bir","iki","üç","dört","beş","altı","yedi","sekiz","dokuz"]
     tens = ["","on","yirmi","otuz","kırk","elli","altmış","yetmiş","seksen","doksan"]
-    if not(1000<=number<=9999):
+    if not(1000 <= number <= 9999):
         return "4 basamaklı sayı giriniz!"
 
     one_digit = number % 10
