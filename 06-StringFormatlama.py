@@ -1,4 +1,4 @@
- #? STRING FORMATLAMA
+ #? STRING FORMATLAMA({:})
 
 isim = "Veysel KUŞ"
 yas = 34
@@ -19,16 +19,16 @@ print("------------------------------------------")
 
 #? Ondalık basamak
 #* :.2f, virgülden sonra 2 basamak gösterir.
-print("f'{fiyat:.2f}' →", f"{fiyat:.2f}")
+print("f'{19.563480:.2f}' →", f"{19.563480:.2f}")
 print("------------------------------------------")
 
 #? Hizalama
 #* <: Sola, >: Sağa, ^: Ortaya hizalar. Sayı toplam genişliği belirtir.
-print("'Ad: {:<10}'.format('Veysel') →", "Ad: {:<10}".format("Veysel"))
+print("'Ad: {:<15}'.format('Veysel') →", "Ad: {:<15},sola".format('Veysel'))
 print("------------------------------------------")
-print("'Ad: {:>10}'.format('Veysel') →", "Ad: {:>10}".format("Veysel"))
+print("'Ad: {:>15}'.format('Veysel') →", "Ad: {:>15},sağa".format('Veysel'))
 print("------------------------------------------")
-print("'Ad: {:^10}'.format('Veysel') →", "Ad: {:^10}".format("Veysel"))
+print("'Ad: {:^15}'.format('Veysel') →", "Ad: {:^15},ortaya".format('Veysel'))
 print("------------------------------------------")
 
 #? İşaret
@@ -37,9 +37,15 @@ print("------------------------------------------")
 #* boşluk → Pozitif sayının önüne boşluk, negatif sayının önüne - koyar.
 print("'{:+}'.format(7) →", "{:+}".format(7))
 print("------------------------------------------")
-print("'{: }'.format(7) →", "{: }".format(7))
+print("'{:+}'.format(7) →", "{:+}".format(-7))
+print("------------------------------------------")
+print("'{:-}'.format(7) →", "{:-}".format(7))
 print("------------------------------------------")
 print("'{:-}'.format(-7) →", "{:-}".format(-7))
+print("------------------------------------------")
+print("'{: }'.format(7) →", "{: }".format(7))
+print("------------------------------------------")
+print("'{: }'.format(-7) →", "{: }".format(-7))
 print("------------------------------------------")
 
 #? Binlik ayırıcı
