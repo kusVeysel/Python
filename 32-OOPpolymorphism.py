@@ -1,5 +1,5 @@
-
-#* Polymorphism(Çok Biçimlilik): Aynı isimdeki methodların farklı classlarda farklı davranması
+ #? Polymorphism(Çok Biçimlilik)
+#* Aynı isimdeki methodun, farklı classlarda nesneye göre farklı davranmasıdır
 
 class Vehicle:
     def move(self):
@@ -21,7 +21,7 @@ class Bicycle(Vehicle):
     pass
 
 
-vehicles = [Car(),Boat(),Airplane(),Bicycle()]
+vehicles = [Car(), Boat(), Airplane(), Bicycle()]
 
 for vehicle in vehicles:
     print(vehicle.move())
