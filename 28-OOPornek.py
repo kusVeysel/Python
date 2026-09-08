@@ -1,7 +1,8 @@
 class Animal:
-    def __init__(self,name,alive):
+    def __init__(self, name, alive):
         self.name = name
         self.is_alive = alive
+
     def eat(self):
         print(f"{self.name} is eating")
 
