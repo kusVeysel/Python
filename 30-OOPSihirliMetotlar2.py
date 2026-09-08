@@ -6,9 +6,9 @@ my_iterable = iter(my_tuple)
 # my_string = "Veysel"
 # my_iterable = iter(my_string)
 
-print(next(my_iterable)) #* sonraki değeri verir
-print(next(my_iterable)) #* sonraki değeri verir
-print(next(my_iterable)) #* sonraki değeri verir
+print(next(my_iterable)) #* Iterator'ın sıradaki değerini döndürür
+print(next(my_iterable)) #* Iterator'ın sıradaki değerini döndürür
+print(next(my_iterable)) #* Iterator'ın sıradaki değerini döndürür
 
 
 for item in my_tuple:
@@ -55,21 +55,23 @@ class Person:
 
     def __delattr__(self, attr):
         if attr == "name":
-            raise AttributeError("Cannot delete name attribute!")
+            raise AttributeError(f"Cannot delete {attr} attribute!")
         super().__delattr__(attr)
 
-    def __getattr__(self, attr): #* attribute(property) için kullanılan sihirli methodu
-        return f"'{attr}' attribute (propert) is not found"
+    def __getattr__(self, attr): #* İstenen attribute bulunamadığında otomatik çalışır.
+        raise AttributeError(f"{attr} attribute (propert) is not found")
     
-    def __setattr__(self, attr, value): #* attribute(property) güncellemek(eklemek) için kullanılan sihirli methodu
+    def __setattr__(self, attr, value): #* Bir attribute oluşturulurken veya değeri değiştirilirken çalışır
         super().__setattr__(attr,value)
         
+    def __str__(self):
+        return str(self.value)
+    
 p1 = Person("Veysel KUŞ",1)
 
 print(p1.name)
-print(p1.age)
-
-p1.age = 19
+# print(p1.age) #* Bu attribute olmadığı için __getattr__ çalışır
+p1.age = 19 #* __setattr__ çalışır
 print(p1.age)
 
 del p1.number
