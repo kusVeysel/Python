@@ -1,3 +1,5 @@
+ #? iter() - next() Kullanımı
+
 my_tuple = ("Grpahe","Strawberry","Fig","Cherry","Pineapple")
 my_iterable = iter(my_tuple)
 
@@ -8,6 +10,7 @@ print(next(my_iterable)) #* sonraki değeri verir
 print(next(my_iterable)) #* sonraki değeri verir
 print(next(my_iterable)) #* sonraki değeri verir
 
+
 for item in my_tuple:
     print(item)
 #* next next next next... ile aynı işlevi görür
@@ -17,8 +20,10 @@ class Counter:
     def __init__(self,max_value):
         self.max_value = max_value
         self.current = 0
+
     def __iter__(self):
         return self
+    
     def __next__(self):
         if(self.current < self.max_value):
             self.current += 1
@@ -28,52 +33,69 @@ class Counter:
     
 my_object = Counter(19)
 my_iterable = iter(my_object)
+
 print(next(my_iterable))
 print(next(my_iterable))
 print(next(my_iterable))
 print(next(my_iterable))
 print(next(my_iterable))
 
-print()
+print("------------------------------------------")
+
 for item in my_object:
     print(item)
-
-print()
+#* aynı gösterim
+print("------------------------------------------")
 
 
 class Person:
     def __init__(self,name,number):
         self.name = name
         self.number = number
+
     def __delattr__(self, attr):
         if attr == "name":
             raise AttributeError("Cannot delete name attribute!")
         super().__delattr__(attr)
+
     def __getattr__(self, attr): #* attribute(property) için kullanılan sihirli methodu
         return f"'{attr}' attribute (propert) is not found"
+    
     def __setattr__(self, attr, value): #* attribute(property) güncellemek(eklemek) için kullanılan sihirli methodu
         super().__setattr__(attr,value)
         
-
 p1 = Person("Veysel KUŞ",1)
+
 print(p1.name)
 print(p1.age)
+
 p1.age = 19
 print(p1.age)
-del p1.number
-print(hasattr(p1,"number"))
 
-print()
+del p1.number
+print(hasattr(p1, "number"))
+
+print("------------------------------------------")
+
+
 class Number:
     def __init__(self,value):
         self.value = value
-    def __int__(self):
+
+    def __int__(self): #* sayıyı int yapma işleminin sihirli metodu
         return int(self.value)
-    def __float__(self):
+    
+    def __float__(self): #* sayıyı float yapma işleminin sihirli metodu
         return float(self.value)
 
-number = Number(7.19)
+    def __str__(self):
+        return str(self.value)
+
+
+number1 = Number(7.19)
 number2 = Number(7)
-print(int(number))
-print(float(number2))
-    
+print("number1 →",number1)
+print("number2 →",number2)
+
+print("int(number1) →",int(number1)) #* __int__ çalışır
+print("float(number2) →",float(number2)) #* __float__ çalışır
