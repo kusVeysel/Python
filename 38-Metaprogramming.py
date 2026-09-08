@@ -11,5 +11,3 @@ class Person:
 Person.newMethod = newMethod
 p1 = Person()
 p1.newMethod()
-
-

@@ -1,115 +1,209 @@
 
-#? 1.Örnek
+#? DECORATOR (Süsleyici / Dekoratör) Fonksiyonu
+
+#* Decorator, bir fonksiyonun çalışma zamanında davranışını değiştirmeden ona yeni özellikler eklememizi sağlayan bir tasarım kalıbıdır
+
+#* Temel prensip: Fonksiyonları birer nesne olarak kabul eden Python, onları başka bir fonksiyona argüman olarak gönderebilir ve geri döndürebilir.
+
+#* @decorator sözdizimi aslında şuna eşdeğerdir:
+#*   my_func = decorator(my_func)
+
+#* Yani @ işareti, fonksiyonu decorator'a sarar(wrap) ve orijinal fonksiyonun yerine wrapper fonksiyonu koyar.
+
+#* *args ve **kwargs:
+#* *args   → Sıralı (positional) argümanları tuple olarak toplar
+#* **kwargs → Anahtar kelime (keyword) argümanlarını dict olarak toplar. Bu sayede decorator her tür fonksiyona uygulanabilir.
+
+
+#? 1.Örnek - Temel Decorator Yapısı
 print("\n--------1.Örnek--------\n")
 
-def decorator_function(func):
-    def wrapper_function(*args,**kwargs):
-        print(f"{func.__name__} is start")
-        result = func(*args,**kwargs)
-        print(f"{func.__name__} is end")
-        return result
-    return wrapper_function
+from functools import wraps  #* wraps: decorator'ın orijinal fonksiyonun __name__, __doc__ gibi metadata'sını korur
 
-@decorator_function
+def decorator_function(func):
+    @wraps(func)  #* Orijinal fonksiyonun ismini ve docstring'ini korur
+    def wrapper_function(*args, **kwargs):
+        print(f"{func.__name__} is start")  #* Fonksiyon çalışmadan önce yapılacak işlem
+        result = func(*args, **kwargs)       #* Orijinal fonksiyonu çalıştırır
+        print(f"{func.__name__} is end")    #* Fonksiyon çalıştıktan sonra yapılacak işlem
+        return result                        #* Orijinal fonksiyonun dönüş değerini iletir
+    return wrapper_function  #* Wrapper fonksiyonu döndürür (fonksiyonun kendisi değil!)
+
+@decorator_function  #* myMessage = decorator_function(myMessage) anlamına gelir
 def myMessage():
     print("This is an example function")
 
 myMessage()
 
 #* __name__ : fonksiyonun ismini verir
+#* @wraps kullanılmazsa myMessage.__name__ "wrapper_function" olurdu, "myMessage" değil
+print(f"Fonksiyon ismi: {myMessage.__name__}\n")  #* myMessage (dekoratör sayesinde)
 
 
-#? 2.Örnek
+#? 2.Örnek - Yetkilendirme (Authentication) Decorator'ı
+#* Gerçek hayatta API endpoint'lerinde, sayfa erişimlerinde kullanılır
 print("\n--------2.Örnek--------\n")
 
 def authentication(func):
-    def wrapper(user,*args,**kwargs):
-        if not user.get("auth",False):
+    @wraps(func)
+    def wrapper(user, *args, **kwargs):
+        #* user parametresi wrapper içinde doğrudan alınır,
+        #* böylece orijinal fonksiyona extra parametre eklenmez
+        if not user.get("auth", False):
             print(f"Authorization failed for {user['name']} !")
-            return
-        return func(user,*args,**kwargs)
+            return  #* Yetkisi yoksa fonksiyonu hiç çalıştırmaz
+        return func(user, *args, **kwargs)  #* Yetkisi varsa orijinal fonksiyonu çalıştırır
     return wrapper
 
 @authentication
 def view_account(user):
+    """Kullanıcı hesabını görüntüler."""
     print(f"Welcome, {user['name']}")
 
 user1 = {
-    "name":"Veysel KUŞ",
-    "auth":True
+    "name": "Veysel KUŞ",
+    "auth": True
 }
 user2 = {
-    "name":"Abuzer ÇAYCI",
-    "auth":False
+    "name": "Abuzer ÇAYCI",
+    "auth": False
 }
 
-view_account(user1)
+view_account(user1) 
 view_account(user2)
 
-#? 3.Örnek
+
+#? 3.Örnek - Zaman Ölçücü (Timer) Decorator'ı
+#* Performans testlerinde, API çağrılarında, veritabanı sorgularında kullanılır
 print("\n --------3.Örnek--------\n")
 import time
 
 def timer_decoration(func):
-    def wrapper(*args,**kwargs):
-        start_time = time.time()
-        result = func(*args,**kwargs)
-        end_time = time.time()
-        print(f"Function {func.__name__} completed in {end_time-start_time:.4f} second\n")
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()           #* Başlangıç zamanını kaydet
+        result = func(*args, **kwargs)     #* Orijinal fonksiyonu çalıştır
+        end_time = time.time()             #* Bitiş zamanını kaydet
+        elapsed = end_time - start_time    #* Geçen süreyi hesapla
+        print(f"Function {func.__name__} completed in {elapsed:.4f} seconds\n")
         return result
     return wrapper
 
 @timer_decoration
 def slow_function(n):
+    """Büyük bir aralığın toplamını hesaplar."""
     total = sum(range(n))
     print(f"Total: {total}")
 
 @timer_decoration
 def fast_function(n):
+    """Küçük bir aralığın toplamını hesaplar."""
     total = sum(range(n))
     print(f"Total: {total}")
 
 @timer_decoration
 def faster_function(n):
+    """Çok küçük bir aralığın toplamını hesaplar."""
     total = sum(range(n))
     print(f"Total: {total}")
 
-slow_function(1000000)
-fast_function(100000)
-faster_function(10000)
+slow_function(1000000)    #* 1M eleman → daha yavaş
+fast_function(100000)     #* 100K eleman → orta hızda
+faster_function(10000)    #* 10K eleman  → en hızlı
 
-#? 4.Örnek
+
+#? 4.Örnek - Esnek (Flexible) Decorator
+#* Farklı imzalara sahip fonksiyonlarda kullanılabilir
 print("\n --------4.Örnek--------\n")
 
 def flexible_decorator(func):
-    def wrapper(*args,**kwargs):
-        print(f"Function name is {func.__name__}")
-        if(args):
-            print(f"args for {func.__name__}: {args}")
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        #* Fonksiyon hakkında bilgi yazdır
+        print(f"Function name: {func.__name__}")
+
+        #* Positional argümanları göster
+        if args:
+            print(f"  args: {args}")
         else:
-            print(f"args for {func.__name__}: none")
-        if(kwargs):
-            print(f"kwargs for {func.__name__}: {kwargs}")
+            print(f"  args: none")
+
+        #* Keyword argümanları göster
+        if kwargs:
+            print(f"  kwargs: {kwargs}")
         else:
-            print(f"kwargs for {func.__name__}: none")
-        result = func(*args,**kwargs)
-        print(f"{func.__name__} function's result: {result}",end="\n\n")
+            print(f"  kwargs: none")
+
+        result = func(*args, **kwargs)  #* Orijinal fonksiyonu çalıştır
+        print(f"  Result: {result}\n")
         return result
     return wrapper
 
 @flexible_decorator
-def add(x,y):
-    return x+y
+def add(x, y):
+    return x + y
 
 @flexible_decorator
-def greet(name,age,country):
+def greet(name, age, country):
     return f"Hello {name}, your age is {age} and your country is {country}"
 
 @flexible_decorator
-def multiply_and_sum(*numbers,factor):
-    return sum(numbers)*factor
+def multiply_and_sum(*numbers, factor):
+    """Sayıları toplar ve factor ile çarpar."""
+    return sum(numbers) * factor
 
-add(3,4)
+add(3, 4)
 greet("Veysel KUŞ", age=19, country="Türkiye")
-multiply_and_sum(2,5,7,1,factor=3)
+multiply_and_sum(2, 5, 7, 1, factor=3)
 
+
+#? 5.Örnek - Decorator Zincirleme (Decorator Chaining)
+#* Birden fazla decorator'ı üst üste uygulayabilirsiniz
+#* @A @B my_func → A(B(my_func)) şeklinde çalışır
+print("\n --------5.Örnek--------\n")
+
+def bold(func):
+    """Metni kalın yapar (buryada sadece süsleme)."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"<b>{func(*args, **kwargs)}</b>"
+    return wrapper
+
+def italic(func):
+    """Metni eğik yapar (buryada sadece süsleme)."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"<i>{func(*args, **kwargs)}</i>"
+    return wrapper
+
+@bold       #* Dış: bold(say_hello)
+@italic     #* İç: italic(say_hello)
+def say_hello(name):
+    return f"Hello {name}"
+
+print(say_hello("Veysel"))  #* <b><i>Hello Veysel</i></b>
+print(f"Fonksiyon adı: {say_hello.__name__}\n")  #* say_hello (metadata korunur)
+
+
+#? 6.Örnek - Parametre Alan Decorator
+#* Decorator'ın kendisi de parametre alabilir
+#* Bunun için 3 katmanlı yapı kullanılır
+print("\n --------6.Örnek--------\n")
+
+def repeat(times):
+    """Bir fonksiyonu belirli sayıda tekrar çalıştırır."""
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            result = None
+            for _ in range(times):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
+
+@repeat(times=3)  #* repeat(3) → decorator döndürür → @decorator uygulanır
+def greet(name):
+    print(f"Hello {name}!")
+
+greet("Veysel")
