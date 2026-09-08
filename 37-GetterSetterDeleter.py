@@ -17,9 +17,12 @@ class Person:
         print("Deleting name varible...")
         self.name = None
 
+
 p1 = Person("Veysel KUŞ")
 print(p1.name_function)
+
 p1.name_function = "Abuzer ÇAYCI"
 print(p1.name_function)
+
 del p1.name_function
 print(p1.name_function)

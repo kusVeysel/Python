@@ -1,5 +1,4 @@
-
-#? DECORATOR (Süsleyici / Dekoratör) Fonksiyonu
+ #? DECORATOR (Süsleyici / Dekoratör) Fonksiyonu
 
 #* Decorator, bir fonksiyonun çalışma zamanında davranışını değiştirmeden ona yeni özellikler eklememizi sağlayan bir tasarım kalıbıdır
 
@@ -91,19 +90,19 @@ def timer_decoration(func):
 
 @timer_decoration
 def slow_function(n):
-    """Büyük bir aralığın toplamını hesaplar."""
+    # Büyük bir aralığın toplamını hesapla
     total = sum(range(n))
     print(f"Total: {total}")
 
 @timer_decoration
 def fast_function(n):
-    """Küçük bir aralığın toplamını hesaplar."""
+    # Küçük bir aralığın toplamını hesapla
     total = sum(range(n))
     print(f"Total: {total}")
 
 @timer_decoration
 def faster_function(n):
-    """Çok küçük bir aralığın toplamını hesaplar."""
+    # Çok küçük bir aralığın toplamını hesaplar
     total = sum(range(n))
     print(f"Total: {total}")
 
@@ -163,14 +162,14 @@ multiply_and_sum(2, 5, 7, 1, factor=3)
 print("\n --------5.Örnek--------\n")
 
 def bold(func):
-    """Metni kalın yapar (buryada sadece süsleme)."""
+    # Metni kalın yapar (buryada sadece süsleme)
     @wraps(func)
     def wrapper(*args, **kwargs):
         return f"<b>{func(*args, **kwargs)}</b>"
     return wrapper
 
 def italic(func):
-    """Metni eğik yapar (buryada sadece süsleme)."""
+    # Metni eğik yapar (buryada sadece süsleme)
     @wraps(func)
     def wrapper(*args, **kwargs):
         return f"<i>{func(*args, **kwargs)}</i>"
@@ -191,7 +190,7 @@ print(f"Fonksiyon adı: {say_hello.__name__}\n")  #* say_hello (metadata korunur
 print("\n --------6.Örnek--------\n")
 
 def repeat(times):
-    """Bir fonksiyonu belirli sayıda tekrar çalıştırır."""
+    # Bir fonksiyonu belirli sayıda tekrar çalıştırır
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
