@@ -1,26 +1,30 @@
  #? METAPROGRAMMING (Meta Programlama)
 
-#* Metaprogramming, programların kendilerini çalışma zamanında (runtime)
-#* manipulate etmesini sağlayan tekniklerdir.
+#* Metaprogramming, programların kendi yapılarını veya davranışlarını çalışma zamanında (runtime) incelemesini, oluşturmasını veya değiştirmesini sağlayan tekniklerdir
 
-#* Kelime anlamı: "programlama üzerine programlama"
-#*   - Kod, diğer kodu üretir veya değiştirir
-#*   - Sınıflar çalışma zamanında oluşturulabilir
-#*   - Mevcut sınıflara/davranışlara dinamik olarak ekleme yapılabilir
+#* Kelime anlamı: "Programlama üzerine programlama"
+#* → Kod, başka kodları oluşturabilir veya değiştirebilir.
+#* → Sınıflar çalışma zamanında oluşturulabilir.
+#* → Mevcut sınıflara veya nesnelere dinamik olarak özellik/metot eklenebilir.
 
-#* Python'da metaprogramming'in temel araçları:
-#*   1. type()         → Sınıflar dinamik olarak oluşturulabilir
-#*   2. getattr/hasattr/setattr/delattr → Nitelikler üzerinde dinamik işlem
-#*   3. __new__        → Nesne oluşumunu kontrol eden sihirli metot
-#*   4. Metaclass      → Sınıfların nasıl oluşturulduğunu denetler
-#*   5. Monkey Patching → Çalışma zamanında sınıfa/davranışa müdahale
+#* Python'da metaprogramming ile ilişkili temel araçlar:
+#*   1. type()                           → Sınıfları dinamik olarak oluşturabilir.
+#*   2. getattr/hasattr/setattr/delattr  → Nitelikler üzerinde dinamik işlem yapabilir.
+#*   3. __new__                          → Nesne oluşturma sürecini kontrol eder.
+#*   4. Metaclass                        → Sınıfların nasıl oluşturulacağını kontrol eder.
+#*   5. Monkey Patching                  → Çalışma zamanında mevcut yapıyı değiştirebilir.
+#*   6. __init_subclass__                → Alt sınıfların oluşturulmasını takip/özelleştirebilir.
+#*   7. __call__                         → Nesnelerin fonksiyon gibi çağrılmasını sağlar.
 
 
-#? 1.Örnek - type() ile Dinamik Sınıf Oluşturma
-#* type() sadece tiplere bakmakla kalmaz, yeni sınıflar da üretir
-#* type(name, bases, attrs) → name: sınıf adı, bases: miras alınan sınıflar, attrs: sözlük
+#? 1. Örnek - type() ile Dinamik Sınıf Oluşturma
+#* type() sadece nesnenin tipini öğrenmek için kullanılmaz
+#* type(name, bases, attrs) kullanımıyla çalışma zamanında yeni sınıflar oluşturulabilir.
+#* name  → Oluşturulacak sınıfın adı
+#* bases → Miras alınacak sınıfların bulunduğu tuple
+#* attrs → Sınıfın attribute ve methodlarının bulunduğu dictionary
 
-print("\n--------1.Örnek - type() ile Dinamik Sınıf--------\n")
+print("\n-------- 1. Örnek - type() ile Dinamik Sınıf --------\n")
 
 #* Klasik sınıf tanımı
 class Person:
@@ -30,172 +34,219 @@ class Person:
     def greet(self):
         return f"Hello, I'm {self.name}"
 
-#* type() ile aynısını oluşturabiliriz
-PersonDynamic = type("PersonDynamic", (), {
-    "name": None,
-    "greet": lambda self: f"Hello, I'm {self.name}"
-})
+#* type() ile çalışma zamanında sınıf oluşturuluyor
+PersonDynamic = type(
+    "PersonDynamic",
+    (),
+    {
+        "__init__": lambda self, name: setattr(self, "name", name),
+        "greet": lambda self: f"Hello, I'm {self.name}"
+    }
+)
 
 p1 = Person("Veysel")
-p2 = PersonDynamic()
-p2.name = "Veysel (Dynamic)"
+p2 = PersonDynamic("Veysel (Dynamic)")
 
 print(f"Klasik: {p1.greet()}")
 print(f"Dynamic: {p2.greet()}")
+
 print(f"p1'in sınıfı: {type(p1)}")
 print(f"p2'nin sınıfı: {type(p2)}")
 
 
-#? 2.Örnek - type() ile Miras Alan Dinamik Sınıf
-print("\n--------2.Örnek - Dinamik Miras--------\n")
+#? 2. Örnek - type() ile Miras Alan Dinamik Sınıf
+print("\n-------- 2. Örnek - Dinamik Miras --------\n")
 
 def extra_method(self):
     return f"Extra method from {self.__class__.__name__}"
 
-#* Person'dan türeyen ve ekstra metodu olan bir sınıf oluştur
+#* Person sınıfından miras alan ve ekstra metodu bulunan
+#* yeni bir sınıf çalışma zamanında oluşturuluyor.
 DerivedPerson = type(
-    "DerivedPerson",          #* Sınıf adı
-    (Person,),                #* Miras alınan sınıflar (tuple)
-    {"extra": extra_method}   #* Ek özellikler (sözlük)
+    "DerivedPerson",
+    (Person,),
+    {
+        "extra": extra_method
+    }
 )
 
+
 dp = DerivedPerson("Ayşe")
-print(dp.greet())      #* Person'dan gelen metot
+
+print(dp.greet())      #* Person sınıfından miras alınan metot
 print(dp.extra())      #* Dinamik olarak eklenen metot
 
 
-#? 3.Örnek - getattr, hasattr, setattr, delattr
-#* Bu fonksiyonlar bir nesnenin nitelikleriyle çalışma zamanında etkileşim kurar
-#* Metaprogramming'in en temel araçlarındandır
+#? 3. Örnek - getattr(), hasattr(), setattr(), delattr()
+#* Bu fonksiyonlar nesnelerin attribute'larıyla çalışma zamanında
+#* dinamik olarak işlem yapmayı sağlar.
 
-print("\n--------3.Örnek - Dinamik Nitelik Erişimi--------\n")
+print("\n-------- 3. Örnek - Dinamik Nitelik Erişimi --------\n")
 
 class Car:
     def __init__(self, brand, model):
         self.brand = brand
         self.model = model
 
+
 car = Car("Toyota", "Corolla")
 
-#* hasattr(nesne, "nitelik_adi") → Nitelik var mı kontrol et
-print(f"'brand' var mı? {hasattr(car, 'brand')}") #* True
-print(f"'color' var mı? {hasattr(car, 'color')}") #* False
+#* hasattr(nesne, "nitelik_adi")
+#* Belirtilen attribute nesnede mevcut mu kontrol eder.
+print(f"'brand' var mı? {hasattr(car, 'brand')}")  #* True
+print(f"'color' var mı? {hasattr(car, 'color')}")  #* False
 
-#* getattr(nesne, "nitelik_adi", varsayilan) → Niteliği oku
-print(f"Marka: {getattr(car, 'brand')}") #* Toyota
-print(f"Renk: {getattr(car, 'color', 'Bilinmiyor')}") #* Bilinmiyor (varsayılan)
+#* getattr(nesne, "nitelik_adi", varsayılan)
+#* Attribute'un değerini dinamik olarak okur.
+print(f"Marka: {getattr(car, 'brand')}")  #* Toyota
+print(f"Renk: {getattr(car, 'color', 'Bilinmiyor')}")  #* Bilinmiyor
 
-#* setattr(nesne, "nitelik_adi", deger) → Niteliği ekle veya değiştir
+#* setattr(nesne, "nitelik_adi", deger)
+#* Attribute ekler veya mevcut attribute'un değerini değiştirir.
 setattr(car, "color", "Beyaz")
 setattr(car, "year", 2024)
+
 print(f"Renk: {car.color}, Yıl: {car.year}")
 
-#* delattr(nesne, "nitelik_adi") → Niteliği sil
+#* delattr(nesne, "nitelik_adi")
+#* Belirtilen attribute'u siler.
 delattr(car, "year")
+
 print(f"'year' silindikten sonra var mı? {hasattr(car, 'year')}")  #* False
 
 
-#? 4.Örnek - getattr ile Dinamik Metot Çağırma
-#* Bir metot adını string olarak alıp çalışma zamanında çağırabiliriz
-print("\n--------4.Örnek - Dinamik Metot Çağırma--------\n")
+#? 4. Örnek - getattr() ile Dinamik Metot Çağırma
+#* Bir metot adını string olarak alıp çalışma zamanında
+#* ilgili metodu bulup çağırabiliriz.
+
+print("\n-------- 4. Örnek - Dinamik Metot Çağırma --------\n")
 
 class Calculator:
     def add(self, a, b):
         return a + b
+
     def subtract(self, a, b):
         return a - b
+
     def multiply(self, a, b):
         return a * b
 
+
 calc = Calculator()
 
-#* Kullanıcıdan bir metot adı geldiğini varsayalım
+#* Kullanıcıdan bir metot adı geldiğini varsayalım.
 method_name = "multiply"
-method = getattr(calc, method_name)  #* Metodu string olarak al
-result = method(5, 3)               #* Çağır
+
+#* String olarak verilen metot adına karşılık gelen metot alınır.
+method = getattr(calc, method_name)
+
+#* Alınan metot çağrılır.
+result = method(5, 3)
+
 print(f"calc.{method_name}(5, 3) = {result}")
 
-#* Tüm metotları dinamik olarak listele
+#* Tüm public metotları dinamik olarak listele
 print("\nTüm metotlar:")
+
 for attr_name in dir(calc):
-    if not attr_name.startswith("_"):  #* Özel nitelikleri atla
+    if not attr_name.startswith("_"):
         attr = getattr(calc, attr_name)
-        if callable(attr):  #* Çağrılabilir mi kontrol et
+
+        if callable(attr):
             print(f"  → {attr_name}(): {attr(10, 5)}")
 
 
-#? 5.Örnek - __new__ ile Nesne Oluşturma Kontrolü
-#* __new__, __init__'den önce çalışır
-#* Nesnenin oluşumunu tamamen kontrol etmemizi sağlar
-#* Genellikle Singleton tasarım kalıbı için kullanılır
-print("\n--------5.Örnek - __new__ ve Singleton--------\n")
+#? 5. Örnek - __new__ ile Nesne Oluşturma Kontrolü
+#* __new__ metodu, __init__ metodundan önce çalışır.
+#* Nesnenin oluşturulma sürecini kontrol eder.
+#* Singleton gibi tasarım kalıplarında kullanılabilir.
+
+print("\n-------- 5. Örnek - __new__ ve Singleton --------\n")
 
 class Singleton:
-    _instance = None  #* Sınıfa ait tek_instance referansı
+    _instance = None  #* Sınıfa ait tek instance referansı
 
     def __new__(cls, *args, **kwargs):
-        if cls._instance is None:  #* Eğer henüz instance yoksa
-            cls._instance = super().__new__(cls)  #* Yeni oluştur
-        return cls._instance  #* Her zaman aynı instance'ı döndür
+        #* Eğer daha önce instance oluşturulmadıysa oluştur.
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+
+        #* Her zaman aynı instance döndürülür.
+        return cls._instance
 
     def __init__(self, value):
-        self.value = value  #* __init__ her çağrıda çalışır ama instance aynıdır
+        #* __init__ her çağrıda çalışır.
+        #* Ancak __new__ aynı instance'ı döndürür.
+        self.value = value
 
 s1 = Singleton("İlk")
 s2 = Singleton("İkinci")
 
-print(f"s1.value: {s1.value}")          #* İkinci (son atama)
-print(f"s2.value: {s2.value}")          #* İkinci
-print(f"s1 == s2: {s1 is s2}")          #* True (aynı nesne)
+print(f"s1.value: {s1.value}")  #* İkinci
+print(f"s2.value: {s2.value}")  #* İkinci
+print(f"s1 is s2: {s1 is s2}")  #* True
 print(f"id(s1): {id(s1)}, id(s2): {id(s2)}")  #* Aynı id
 
 
-#? 6.Örnek - Monkey Patching (Çalışma Zamanında Sınıfa Müdahale)
-#* Mevcut bir sınıfa çalışma zamanında yeni metot veya nitelik ekler
-#* Üçüncü parti kütüphanelerde davranış değiştirmek için kullanılır
-print("\n--------6.Örnek - Monkey Patching--------\n")
+#? 6. Örnek - Monkey Patching
+#* Mevcut bir sınıfın veya nesnenin davranışını çalışma zamanında değiştirmeye
+#* veya ona yeni özellik/metot eklemeye Monkey Patching denir.
+#* Özellikle mevcut kodu doğrudan değiştirmeden davranışını değiştirmek için kullanılabilir.
+
+print("\n-------- 6. Örnek - Monkey Patching --------\n")
 
 class Person:
     pass
 
-#* Sınıfa yeni metot ekle
-def newMethod(self):
+#* Sınıfa çalışma zamanında yeni metot ekleniyor.
+def new_method(self):
     print("New method added!")
 
-Person.newMethod = newMethod
+Person.new_method = new_method
 
 p1 = Person()
-p1.newMethod()  #* New method added!
+p1.new_method()
 
-#* Mevcut metodu değiştir (override)
+#* Sınıfa çalışma zamanında __init__ metodu ekleniyor/değiştiriliyor.
 def enhanced_init(self, name, age):
     self.name = name
     self.age = age
 
 Person.__init__ = enhanced_init
+
 p2 = Person("Veysel", 25)
+
 print(f"İsim: {p2.name}, Yaş: {p2.age}")
 
-#* Sınıfa类属性 ekle
+#* Sınıfa çalışma zamanında class attribute ekleniyor.
 Person.species = "Homo Sapiens"
+
 print(f"Tür: {p2.species}")
 
 
-#? 7.Örnek - Sınıf Dekoratörü ile Dinamik Sınıf Modifikasyonu
-#* Sınıf dekoratörleri, sınıf tanımı biter bitmez çalışır
-#* Tüm instance'lara otomatik olarak özellik ekler
-print("\n--------7.Örnek - Sınıf Dekoratörü--------\n")
+#? 7. Örnek - Sınıf Dekoratörü ile Dinamik Sınıf Modifikasyonu
+#* Sınıf dekoratörü, sınıf tanımı tamamlandıktan sonra sınıfı alır
+#* ve sınıf üzerinde değişiklik yapabilir.
+#* Bu örnekte tüm instance'lara otomatik olarak creation_time ekleniyor.
+
+print("\n-------- 7. Örnek - Sınıf Dekoratörü --------\n")
 
 def add_timestamp(cls):
-    """Her instance'a creation_time ekler."""
-    import time
-    original_init = cls.__init__  #* Orijinal __init__'i sakla
+    #* Orijinal __init__ metodu saklanıyor.
+    original_init = cls.__init__
 
     def new_init(self, *args, **kwargs):
-        self.creation_time = time.time()  #* Yeni özellik ekle
-        original_init(self, *args, **kwargs)  #* Orijinal_init'i çağır
+        import time
 
+        #* Instance oluşturulurken yeni özellik ekleniyor.
+        self.creation_time = time.time()
+
+        #* Orijinal __init__ metodu çalıştırılıyor.
+        original_init(self, *args, **kwargs)
+
+    #* __init__ metodu yeni davranışla değiştiriliyor.
     cls.__init__ = new_init
+
     return cls
 
 @add_timestamp
@@ -204,56 +255,74 @@ class User:
         self.name = name
 
 user = User("Veysel")
+
 print(f"Kullanıcı: {user.name}")
 print(f"Oluşturulma zamanı: {user.creation_time:.4f}")
 
 
-#? 8.Örnek - Sınıfı String Olarak Oluşturma ve eval() ile Çalıştırma
-#* __new__ gibi __prepare__ ve __init_subclass__ da metaprogramming araçlarıdır
-print("\n--------8.Örnek - Sınıf Üretimi--------\n")
+#? 8. Örnek - type() ile Sınıf Üretimi
+#* Sınıfın attribute ve metotları bir dictionary içerisinde tanımlanabilir.
+#* Daha sonra type() kullanılarak bu bilgilerden yeni bir sınıf oluşturulabilir.
+#* Burada eval() kullanılmamaktadır.
 
-#* Bir sınıfı sözlükten oluştur
+print("\n-------- 8. Örnek - Sınıf Üretimi --------\n")
+
 class_dict = {
-    "__init__": lambda self, x: setattr(self, 'value', x),
+    "__init__": lambda self, x: setattr(self, "value", x),
     "__repr__": lambda self: f"DynamicClass(value={self.value})"
 }
 
-#* Sınıf oluştur ve kullan
-DynClass = type("DynClass", (), class_dict)
+#* Dictionary içerisindeki bilgiler kullanılarak
+#* çalışma zamanında yeni sınıf oluşturuluyor.
+DynClass = type(
+    "DynClass",
+    (),
+    class_dict
+)
+
 obj = DynClass(42)
+
 print(f"DynamicClass: {obj}")
 
 
-#? 9.Örnek - __call__ ile Sınıfı Fonksiyon Gibi Kullanma
-#* __call__ metodu tanımlanırsa, instance() ile çağrılabilir hale gelir
-#* Bu, decorator'lar ve factory fonksiyonları için çok kullanışlıdır
-print("\n--------9.Örnek - __call__ ile Sınıf Kullanımı--------\n")
+#? 9. Örnek - __call__ ile Sınıfı Fonksiyon Gibi Kullanma
+#* __call__ metodu tanımlanan instance'lar fonksiyon gibi çağrılabilir.
+#* Örneğin: object() şeklinde kullanılabilir.
+#* Decorator ve callable object yapılarında kullanılabilir.
+
+print("\n-------- 9. Örnek - __call__ ile Sınıf Kullanımı --------\n")
 
 class Multiplier:
     def __init__(self, factor):
-        self.factor = factor  #* Çarpma faktörünü sakla
+        self.factor = factor
 
     def __call__(self, x):
-        return x * self.factor  #* Instance fonksiyon gibi çağrılabilir
+        return x * self.factor
 
 double = Multiplier(2)
 triple = Multiplier(3)
 
-print(f"double(5) = {double(5)}")    #* 10
-print(f"triple(5) = {triple(5)}")    #* 15
+print(f"double(5) = {double(5)}")  #* 10
+print(f"triple(5) = {triple(5)}")  #* 15
 print(f"double callable mı? {callable(double)}")  #* True
 
 
-#? 10.Örnek - __init_subclass__ ile Sınıf Mirası Kontrolü
-#* Ebeveyn sınıf, türeyen sınıfları otomatik olarak düzenleyebilir
-print("\n--------10.Örnek - __init_subclass__--------\n")
+#? 10. Örnek - __init_subclass__ ile Sınıf Mirası Kontrolü
+#* __init_subclass__, bir sınıftan yeni bir alt sınıf oluşturulduğunda
+#* otomatik olarak çalışır.
+#* Alt sınıfları takip etmek, kayıt altına almak veya kontrol etmek için kullanılabilir.
+
+print("\n-------- 10. Örnek - __init_subclass__ --------\n")
 
 class Plugin:
-    _plugins = []  #* Tüm eklentileri takip et
+    _plugins = []  #* Tüm alt sınıfları takip eder.
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
-        Plugin._plugins.append(cls.__name__)  #* Yeni türeyen sınıfı kaydet
+
+        #* Yeni oluşturulan alt sınıfı listeye ekle.
+        Plugin._plugins.append(cls.__name__)
+
         print(f"  → Yeni eklenti kaydedildi: {cls.__name__}")
 
 class AudioPlugin(Plugin):
