@@ -83,6 +83,7 @@
 #* a+  → sona ekle + oku
 #* x+  → yeni oluştur + oku/yaz
 
+
 import os
 
 print("------------------------------------------")
@@ -385,7 +386,7 @@ print("------------------------------------------")
 if os.path.exists("DosyaIsleme/png.png"):
     os.remove("DosyaIsleme/png.png")
 else:
-    print("The file does not exist")
+    print("Dosya bulunamadı")
 
 
 print("------------------------------------------")
