@@ -90,7 +90,7 @@ print("------------------------------------------")
 #? OPEN()
 #* Dosyayı açma
 
-f = open("DosyaIsleme/dosya.txt", "r", encoding="utf-8")
+f = open("39-DosyaIsleme/Dosyalar/dosya.txt", "r", encoding="utf-8")
 #* encoding="utf-8": Türkçe karakterler (ç, ğ, ı, İ, ö, ş, ü) gibi karakterlerin doğru şekilde okunup/yazılmasına yardımcı olur
 
 
@@ -202,7 +202,7 @@ print("------------------------------------------")
 #* with open(...) kullanımı dosya işlemlerinde en güvenli ve önerilen yöntemlerden biridir
 #* with bloğu sona erdiğinde dosya otomatik olarak kapatılır. Böylece close() yazmayı unutma problemi ortadan kalkar
 
-with open("DosyaIsleme/dosya.txt", "r", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya.txt", "r", encoding="utf-8") as f:
     print(f.read())
 
 #* with bloğu bittikten sonra dosya otomatik kapanır
@@ -212,7 +212,7 @@ print("------------------------------------------")
 #? WRITE()
 #* write() dosyaya string veri yazar. Yazılan karakter sayısını döndürebilir
 
-with open("DosyaIsleme/dosya2.txt", "w", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya2.txt", "w", encoding="utf-8") as f:
     print('f.write("Yavaş yavaş ilerliyoruz\n") →',f.write("Yavaş yavaş ilerliyoruz\n"))
 
 
@@ -220,7 +220,7 @@ with open("DosyaIsleme/dosya2.txt", "w", encoding="utf-8") as f:
 
 #* writelines() birden fazla stringi dosyaya yazar. Kendisi otomatik olarak \n eklemez. Bu nedenle satır sonlarını kendimiz vermeliyiz
 
-with open("DosyaIsleme/dosya2.txt", "w", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya2.txt", "w", encoding="utf-8") as f:
     f.writelines([
         "Python\n",
         "JavaScript\n",
@@ -237,8 +237,8 @@ print("------------------------------------------")
 #* Dosya daha kısaysa dosya 10 byte'a kadar genişletilebilir ve araya null byte (\x00) gelebilir
 #* truncate() yazma yetkisi olan dosyalarda kullanılmalıdır
 
-with open("DosyaIsleme/dosya.txt", "r+", encoding="utf-8") as f:
-    print(os.stat("DosyaIsleme/dosya.txt").st_size)
+with open("39-DosyaIsleme/Dosyalar/dosya.txt", "r+", encoding="utf-8") as f:
+    print(os.stat("39-DosyaIsleme/Dosyalar/dosya.txt").st_size)
 
     f.truncate(10)
 
@@ -252,7 +252,7 @@ print("------------------------------------------")
 #* os.stat() dosya hakkında çeşitli bilgiler verir.
 #* st_size → dosyanın boyutunu BYTE olarak verir.
 
-print('os.stat("DosyaIsleme/dosya.txt").st_size →',os.stat("DosyaIsleme/dosya.txt").st_size)
+print('os.stat("39-DosyaIsleme/Dosyalar/dosya.txt").st_size →',os.stat("39-DosyaIsleme/Dosyalar/dosya.txt").st_size)
 
 
 print("------------------------------------------")
@@ -262,7 +262,7 @@ print("------------------------------------------")
 #* Günlük Python dosya işlemlerinde çok sık kullanılmaz
 #* Daha çok işletim sistemi seviyesindeki işlemlerde kullanılır
 
-with open("DosyaIsleme/dosya.txt", "r", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya.txt", "r", encoding="utf-8") as f:
     print(f.fileno())
 
 
@@ -272,7 +272,7 @@ with open("DosyaIsleme/dosya.txt", "r", encoding="utf-8") as f:
 #* flush() buffer'daki bekleyen verilerin dosyaya gönderilmesini ister.
 #* Özellikle dosyaya yazma işlemi devam ederken verinin bekletilmeden gönderilmesini istediğimiz durumlarda kullanılabilir.
 
-with open("DosyaIsleme/dosya.txt", "w", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya.txt", "w", encoding="utf-8") as f:
     f.write("Bu veri buffer'a alınabilir.")
 
     f.flush()
@@ -289,7 +289,7 @@ print("------------------------------------------")
 #* - Yazma yapılabilir
 #* - Eski içerik otomatik silinmez
 
-with open("DosyaIsleme/dosya.txt", "r+", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya.txt", "r+", encoding="utf-8") as f:
     print(f.read())
 
     f.seek(0)
@@ -308,7 +308,7 @@ print("------------------------------------------")
 #* - Okuma yapılabilir
 #* - Yazma yapılabilir
 
-with open("DosyaIsleme/dosya3.txt", "w+", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya3.txt", "w+", encoding="utf-8") as f:
     f.write("Python")
 
     f.seek(0)
@@ -328,7 +328,7 @@ print("------------------------------------------")
 #* ÖNEMLİ:
 #* Okumaya başlamadan önce seek(0) kullanmak gerekir.
 
-with open("DosyaIsleme/dosya4.txt", "a+", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dosya4.txt", "a+", encoding="utf-8") as f:
     f.write("Python\n")
 
     f.seek(0)
@@ -341,7 +341,7 @@ with open("DosyaIsleme/dosya4.txt", "a+", encoding="utf-8") as f:
 #* x: Sadece yeni dosya oluşturmak istediğimizde kullanılır. Dosya zaten varsa hata verir.
 
 try:
-    with open("DosyaIsleme/yeni_dosya.txt", "x", encoding="utf-8") as f:
+    with open("39-DosyaIsleme/Dosyalar/yeni_dosya.txt", "x", encoding="utf-8") as f:
         f.write("Yeni dosya oluşturuldu.")
 except FileExistsError:
     print("Dosya zaten mevcut.")
@@ -359,7 +359,7 @@ print("------------------------------------------")
 
 #* Resim, PDF, video gibi metin olmayan dosyalarda kullanılır.
 
-with open("DosyaIsleme/png.png", "rb") as f:
+with open("39-DosyaIsleme/Dosyalar/png.png", "rb") as f:
     veri = f.read()
 
     print(veri)
@@ -374,7 +374,7 @@ import os
 
 #* exists(): Dosya veya klasörün mevcut olup olmadığını kontrol eder.
 
-if os.path.exists("DosyaIsleme/png.png"):
+if os.path.exists("39-DosyaIsleme/Dosyalar/png.png"):
     print("Dosya mevcut")
 else:
     print("Dosya mevcut değil")
@@ -383,8 +383,8 @@ else:
 print("------------------------------------------")
 #? DOSYA SİLME
 
-if os.path.exists("DosyaIsleme/png.png"):
-    os.remove("DosyaIsleme/png.png")
+if os.path.exists("39-DosyaIsleme/Dosyalar/png.png"):
+    os.remove("39-DosyaIsleme/Dosyalar/png.png")
 else:
     print("Dosya bulunamadı")
 
@@ -400,7 +400,7 @@ print("------------------------------------------")
 #? KLASÖR OLUŞTURMA
 #* os.mkdir(): Yeni klasör oluşturur.
 
-klasor_yolu = "C:\\Users\\veysel\\Desktop\\Python\\DosyaIsleme\\newFolder"
+klasor_yolu = "C:\\Users\\veysel\\Desktop\\Python\\39-DosyaIsleme/Dosyalar\\newFolder"
 
 if not os.path.exists(klasor_yolu):
     os.mkdir(klasor_yolu)
@@ -419,7 +419,7 @@ if os.path.exists(klasor_yolu):
 #? DOSYANIN SONUNA EKLEME
 #* a modu mevcut içeriği silmeden dosyanın sonuna ekler
 
-with open("DosyaIsleme/dil.txt", "a", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dil.txt", "a", encoding="utf-8") as f:
     f.write("Python\n")
 
 
@@ -434,12 +434,12 @@ with open("DosyaIsleme/dil.txt", "a", encoding="utf-8") as f:
 
 #* Ancak dosyanın tamamını yeniden yazmak gerektiği için büyük dosyalarda verimli olmayabilir
 
-with open("DosyaIsleme/dil.txt", "r", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dil.txt", "r", encoding="utf-8") as f:
     my_text = f.read()
 
 my_text = "1-Python\n" + my_text
 
-with open("DosyaIsleme/dil.txt", "w", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dil.txt", "w", encoding="utf-8") as f:
     f.write(my_text)
 
 
@@ -452,13 +452,13 @@ with open("DosyaIsleme/dil.txt", "w", encoding="utf-8") as f:
 #* 3- Liste üzerinde insert() yap
 #* 4- Dosyanın tamamını yeniden yaz
 
-with open("DosyaIsleme/dil.txt", "r", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dil.txt", "r", encoding="utf-8") as f:
     my_list = f.readlines()
 
 my_list.insert(3, "4-Java\n")
 
-with open("DosyaIsleme/dil.txt", "w", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dil.txt", "w", encoding="utf-8") as f:
     f.writelines(my_list)
 
-with open("DosyaIsleme/dil.txt", "r", encoding="utf-8") as f:
+with open("39-DosyaIsleme/Dosyalar/dil.txt", "r", encoding="utf-8") as f:
     print(f.read())
